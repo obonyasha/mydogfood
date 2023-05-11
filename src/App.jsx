@@ -14,9 +14,17 @@ import Product from "./pages/Product";
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
+    const [modalActive, setModalActive] = useState(false);
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
-    const [modalActive, setModalActive] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setToken(localStorage.getItem("rockToken"))
+        } else {
+            setToken("")
+        }
+    }, [user])
 
     // useEffect срабатывает каждый раз, когда компонент создался или перерисовался
     useEffect(() => {
@@ -39,31 +47,19 @@ const App = () => {
         setGoods(serverGoods);
     }, [serverGoods])
 
-    // useEffect(() => {
-    //     console.log("Modal edit");
-    // }, [modalActive])
-
-    useEffect(() => {
-        console.log("Change user");
-        if (user) {
-            setToken(localStorage.getItem("rockToken"))
-        } else {
-            setToken("")
-        }
-        console.log("u", user);
-    }, [user])
-
     return (
         <>
             <Header
                 user={user}
                 setModalActive={setModalActive}
+                serverGoods={serverGoods}
+                setGoods={setGoods}
             />
             <main>
-                <Searh arr={serverGoods} upd={setGoods} />
+                {/* <Searh  /> */}
                 <Routes>
                     <Route path="/" element={<Main />} />
-                    <Route path="/catalog" element={<Catalog goods={goods}/>} />
+                    <Route path="/catalog" element={<Catalog goods={goods} />} />
                     <Route path="/draft" element={<Draft />} />
                     <Route path="/profile" element={
                         <Profile user={user} setUser={setUser} color="yellow" />

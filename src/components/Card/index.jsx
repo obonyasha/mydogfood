@@ -24,9 +24,9 @@ const Card = ({ img, name, price, _id, discount, tags }) => {
                 &nbsp;₽
             </span>
             <button className="card__btn">В корзину</button>
-            <span className="card__tags">
+            {/* <span className="card__tags">
                 {tags.map(el => <span key={el}>{el}</span>)}
-            </span>
+            </span> */}
         </Link>
     )
 }

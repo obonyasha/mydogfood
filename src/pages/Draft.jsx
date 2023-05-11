@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Searh from "../components/Search";
+import Search from "../components/Search";
 import Promo from "../components/Promo/Promo";
 import Card from "../components/Card";
 import cardsData from "../assets/data";
@@ -25,7 +25,7 @@ const Draft = () => {
     const [goods, setGoods] = useState(cardsData);
     return (
         <div className="container">
-        <Searh arr={cardsData} upd={setGoods} />
+        <Search arr={cardsData} upd={setGoods} />
         {adds.map((el, i) => <Promo key={i} {...el} />)}
         {goods.map((el, i) => <Card
             key={i}

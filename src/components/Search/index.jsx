@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Binoculars } from "react-bootstrap-icons";
 import "./style.css"
 
-const Searh = ({arr, upd}) => {
+const Search = ({arr, upd}) => {
     // let text = "Corn";
     const [text, setText] = useState("");
     const [quantity, setQuantity] = useState(arr.length);
@@ -23,14 +24,14 @@ const Searh = ({arr, upd}) => {
         console.log(result);
     }
     return (
-        <div className="search-block">
-            <input type="search" className="search" value={text} onChange={searchByText} placeholder="Ищу тебя..." />
-            <button onClick={click}>Тык</button>
-            <hr />
+        <div className="search__block">
+            <input type="search" className="search" value={text} onChange={searchByText} placeholder="Поиск" />
+            <button onClick={click}><Binoculars /></button>
+            {/* <hr /> */}
             {/* <div>{text}, {n}, {count}</div> */}
-            <div>По Вашему запросу «{text}» найдено {quantity} подходящих товаров</div>
+            {/* <div>По Вашему запросу «{text}» найдено {quantity} подходящих товаров</div> */}
         </div>
     )
 }
 
-export default Searh;
+export default Search;
