@@ -26,7 +26,7 @@ const Search = ({arr, upd}) => {
     return (
         <div className="search__block">
             <input type="search" className="search" value={text} onChange={searchByText} placeholder="Поиск" />
-            <button onClick={click}><Binoculars /></button>
+            <button onClick={click} className="transition"><Binoculars /></button>
             {/* <hr /> */}
             {/* <div>{text}, {n}, {count}</div> */}
             {/* <div>По Вашему запросу «{text}» найдено {quantity} подходящих товаров</div> */}

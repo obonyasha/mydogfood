@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 // компоненты
-import Searh from "./components/Search";
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
 // страницы
@@ -62,7 +61,7 @@ const App = () => {
                     <Route path="/catalog" element={<Catalog goods={goods} />} />
                     <Route path="/draft" element={<Draft />} />
                     <Route path="/profile" element={
-                        <Profile user={user} setUser={setUser} color="yellow" />
+                        <Profile user={user} setUser={setUser} color="blue" />
                     } />
                     <Route path="/product/:id" element={<Product />} />
                 </Routes>

@@ -21,18 +21,27 @@ const Header = ({ user, setModalActive, serverGoods, setGoods }) => {
                 <nav className="header__menu">
                     {/* Если пользователь === true */}
                     {user && <>
-                        <Link to="/catalog" title="Каталог">
-                            <Folder2 />
-                        </Link>
-                        <Link to="/" title="Избранное">
-                            <Star />
-                        </Link>
-                        <Link to="/" title="Корзина">
-                            <Cart4 />
-                        </Link>
-                        <Link to="/profile" title="Профиль">
-                            <PersonCircle />
-                        </Link>
+                        <span className="transition">
+                            <Link to="/catalog" title="Каталог">
+                                <Folder2 />
+                            </Link>
+                        </span>
+                        <span className="transition">
+                            <Link to="/" title="Избранное">
+                                <Star />
+                            </Link>
+                        </span>
+                        <span className="transition">
+                            <Link to="/" title="Корзина">
+                                <Cart4 />
+                            </Link>
+                        </span>
+                        <span className="transition">
+                            <Link to="/profile" title="Профиль">
+                                <PersonCircle />
+                            </Link>
+                        </span>
+
                     </>}
                     {!user && <a href="" onClick={logIn} title="Войти">
                         <BoxArrowInRight />
@@ -45,7 +54,7 @@ const Header = ({ user, setModalActive, serverGoods, setGoods }) => {
                 {user &&
                     <>
                         <Link to="/catalog" title="Каталог">
-                            <div className="header__catalog">
+                            <div className="header__catalog transition">
                                 Каталог&nbsp;
                                 <span>
                                     <ChevronRight />

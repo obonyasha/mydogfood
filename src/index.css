@@ -1,6 +1,6 @@
 body {
-  background-color: darkslateblue;
-  color: #fff;
+  background-color: #fff;
+  color: black;
   font-family: sans-serif;
   margin: 0;
 }
@@ -17,9 +17,11 @@ a {
 }
 
 #root {
-   min-height: 100vh;
-   display: grid;
-   grid-auto-rows: auto 1fr auto;
+  max-width: 1350px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: grid;
+  grid-auto-rows: auto 1fr auto;
 }
 
 main {
@@ -36,5 +38,17 @@ main {
 }
 
 .container .search-block {
-  grid-column-end:  span 4;
+  grid-column-end: span 4;
 }
+
+.transition {
+  transition: ease-out 0.2s;
+}
+
+.transition:hover {
+  transform: scale(1.1);
+}
+
+/* .maxwidth {
+  max-width: 1350px;
+} */

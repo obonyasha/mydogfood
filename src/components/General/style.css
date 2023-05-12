@@ -13,10 +13,11 @@
 header {
     display: flex;
     flex-direction: column;
-    background-color: silver;
+    background-color: #ffe44d;
     color: black;
     justify-content: space-between;
     padding: 10px 50px;
+    padding-bottom: 200px;
 }
 
 .header__nav {
@@ -43,6 +44,7 @@ header {
     border-radius: 20px;
     padding: 10px;
     font-weight: 600;
+    box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
 }
 
 .header__catalog span {
@@ -50,8 +52,14 @@ header {
     font-size: 0.8rem;
 }
 
+.header__menu {
+    display: flex;
+    gap: 20px;
+    font-size: 24px;
+}
+
 footer {
-    background-color: silver;
+    background-color: #ffe44d;
     color: black;
     display: flex;
     align-items: center;
@@ -59,10 +67,9 @@ footer {
     padding: 10px 50px;
 }
 
-.header__menu {
-    display: flex;
-    gap: 20px;
-    font-size: 24px;
+.footer__cop {
+    font-size: 0.7rem;
+
 }
 
 .footer__cell {

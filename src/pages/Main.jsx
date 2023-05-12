@@ -1,8 +1,13 @@
+import Promo2 from "../components/Promo2";
+import promoList from "../assets/promolist.json";
+
+
+
 const Main = () => {
     return (
-        <>
-            <h1>Главная страница</h1>
-        </>
+        <div className="container">
+            <Promo2 />
+        </div>
     )
 }
 
