@@ -15,9 +15,9 @@ const Header = ({ user, setModalActive, serverGoods, setGoods }) => {
         <header>
             <div className="header__nav">
                 <Logo />
-                <div className="header__search">
+                {user && <div className="header__search">
                     <Search arr={serverGoods} upd={setGoods} />
-                </div>
+                </div>}
                 <nav className="header__menu">
                     {/* Если пользователь === true */}
                     {user && <>

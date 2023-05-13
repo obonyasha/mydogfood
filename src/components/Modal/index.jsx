@@ -94,7 +94,7 @@ const Modal = ({ active, setActive, setUser }) => {
 		style={{ display: active ? "flex" : "none" }}
 	>
 		<div className="modal">
-			<button onClick={() => setActive(false)}>Закрыть окно</button>
+			<button className="btn_close transition" onClick={() => setActive(false)}>х</button>
 			<h3>Авторизация</h3>
 			<form onSubmit={sendForm}>
 				{!auth && <label>
@@ -133,7 +133,7 @@ const Modal = ({ active, setActive, setUser }) => {
 				</label>}
 				<div className="modal-ctl">
 					<button
-						className="modal-btn"
+						className="modal-btn transition"
 						// Если кнопка формы регистрации, то проверяем наличие соответствия паролей, но они не должы быть пустыми
 						disabled={!auth && (!pwd || pwd !== testPwd)}
 					>

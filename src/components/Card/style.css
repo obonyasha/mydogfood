@@ -1,28 +1,30 @@
 .card {
     padding: 20px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     background-color: #fff;
     color: #222;
     border-radius: 4px;
     text-align: center;
     position: relative;
-    align-content: space-between;
+    align-items: center;
 }
 
 .card__img {
-    height: 100px;
-    justify-self: center;
+    height: 150px;
 }
 
 .card__btn {
     border: none;
     outline: none;
     height: 30px;
-    background-color: darkslateblue;
-    color: #fff;
-    border-radius: 4px;
+    background-color: #ffe44d;
+    color: black;
+    border-radius: 26px;
     cursor: pointer;
+    display: inline-block;
+    box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
 }
 
 .card__btn:hover {
@@ -47,4 +49,8 @@
     right: 10px;
     padding: 4px 0;
     cursor: pointer;
+}
+
+.card__name {
+    word-wrap: break-word;
 }

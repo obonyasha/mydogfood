@@ -2,17 +2,17 @@ import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { Telegram, Whatsapp, Instagram } from "react-bootstrap-icons";
 
-const Footer = () => {
+const Footer = ({ token }) => {
     return <footer>
         <div className="footer__cell">
             <Logo />
             <div className="footer__cop">©{new Date().getFullYear()}</div>
         </div>
-        <div className="footer__cell">
+        {token && <div className="footer__cell">
             <Link to="/catalog">Каталог</Link>
             <Link to="/">Избранное</Link>
             <Link to="/">Корзина</Link>
-        </div>
+        </div>}
         <div className="footer__cell">
             <Link to="">Акции</Link>
             <Link to="">Новости</Link>

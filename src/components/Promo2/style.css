@@ -1,4 +1,4 @@
 .promo__img{
-    grid-column-start: 1;
-    grid-column-end: 5;
+  width: 100%;
+  border-radius: 15px;
   }

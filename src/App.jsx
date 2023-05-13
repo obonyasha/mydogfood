@@ -57,7 +57,7 @@ const App = () => {
             <main>
                 {/* <Searh  /> */}
                 <Routes>
-                    <Route path="/" element={<Main />} />
+                    <Route path="/" element={<Main goods={goods} token = {token}/>} />
                     <Route path="/catalog" element={<Catalog goods={goods} />} />
                     <Route path="/draft" element={<Draft />} />
                     <Route path="/profile" element={
@@ -66,7 +66,7 @@ const App = () => {
                     <Route path="/product/:id" element={<Product />} />
                 </Routes>
             </main>
-            <Footer />
+            <Footer token = {token} />
             <Modal
                 active={modalActive}
                 setActive={setModalActive}

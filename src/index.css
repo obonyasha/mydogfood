@@ -25,16 +25,18 @@ a {
 }
 
 main {
-  padding: 30px 50px;
+  padding: 30px 10%;
   display: grid;
   align-content: flex-start;
   gap: 20px;
+  justify-content: center;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  align-items: center;
 }
 
 .container .search-block {
@@ -49,6 +51,22 @@ main {
   transform: scale(1.1);
 }
 
-/* .maxwidth {
-  max-width: 1350px;
-} */
+.promo_big {
+  margin-top: -15%;
+  border-radius: 10px;
+}
+
+.promo__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.maxwidth {
+  max-width: 1040px;
+}
+
+.carousel {
+  padding: 0 40px;
+}
