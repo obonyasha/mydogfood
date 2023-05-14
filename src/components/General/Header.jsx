@@ -12,59 +12,61 @@ const Header = ({ user, setModalActive, serverGoods, setGoods }) => {
     }
 
     return (
-        <header>
-            <div className="header__nav">
-                <Logo />
-                {user && <div className="header__search">
-                    <Search arr={serverGoods} upd={setGoods} />
-                </div>}
-                <nav className="header__menu">
-                    {/* Если пользователь === true */}
-                    {user && <>
-                        <span className="transition">
-                            <Link to="/catalog" title="Каталог">
-                                <Folder2 />
-                            </Link>
-                        </span>
-                        <span className="transition">
-                            <Link to="/" title="Избранное">
-                                <Star />
-                            </Link>
-                        </span>
-                        <span className="transition">
-                            <Link to="/" title="Корзина">
-                                <Cart4 />
-                            </Link>
-                        </span>
-                        <span className="transition">
-                            <Link to="/profile" title="Профиль">
-                                <PersonCircle />
-                            </Link>
-                        </span>
+        <div className="wrapper__box">
+            <header>
+                <div className="header__nav">
+                    <Logo />
+                    {user && <div className="header__search">
+                        <Search arr={serverGoods} upd={setGoods} />
+                    </div>}
+                    <nav className="header__menu">
+                        {/* Если пользователь === true */}
+                        {user && <>
+                            <span className="transition">
+                                <Link to="/catalog" title="Каталог">
+                                    <Folder2 />
+                                </Link>
+                            </span>
+                            <span className="transition">
+                                <Link to="/" title="Избранное">
+                                    <Star />
+                                </Link>
+                            </span>
+                            <span className="transition">
+                                <Link to="/" title="Корзина">
+                                    <Cart4 />
+                                </Link>
+                            </span>
+                            <span className="transition">
+                                <Link to="/profile" title="Профиль">
+                                    <PersonCircle />
+                                </Link>
+                            </span>
 
-                    </>}
-                    {!user && <a href="" onClick={logIn} title="Войти">
-                        <BoxArrowInRight />
-                    </a>}
-                </nav>
-            </div>
-            <div className="header__ban">
-                <h1>Крафтовые лакомства для собак</h1>
-                <h5>Всегда свежие лакомства ручной работы с доставкой по России и Миру</h5>
-                {user &&
-                    <>
-                        <Link to="/catalog" title="Каталог">
-                            <div className="header__catalog transition">
-                                Каталог&nbsp;
-                                <span>
-                                    <ChevronRight />
-                                </span>
-                            </div>
-                        </Link>
-                    </>
-                }
-            </div>
-        </header>
+                        </>}
+                        {!user && <a href="" onClick={logIn} title="Войти">
+                            <BoxArrowInRight />
+                        </a>}
+                    </nav>
+                </div>
+                <div className="header__ban">
+                    <h1>Крафтовые лакомства для собак</h1>
+                    <h5>Всегда свежие лакомства ручной работы с доставкой по России и Миру</h5>
+                    {user &&
+                        <>
+                            <Link to="/catalog" title="Каталог">
+                                <div className="header__catalog transition">
+                                    Каталог&nbsp;
+                                    <span>
+                                        <ChevronRight />
+                                    </span>
+                                </div>
+                            </Link>
+                        </>
+                    }
+                </div>
+            </header>
+        </div>
     )
 }
 

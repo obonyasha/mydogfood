@@ -1,17 +1,17 @@
-import Promo2 from "../components/Promo2";
+import Promo from "../components/Promo";
 import Card from "../components/Card";
 import React, { useState } from 'react';
 import ItemsCarousel from 'react-items-carousel';
 
 
 
-const Main = ({ goods, token }) => {
+const Main = ({ goodsNew, token }) => {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
     return (
-        <>
+        <div className="main__wrapper maxwidth">
             <div className="promo_big">
-                <Promo2 />
+                <Promo />
             </div>
             {token && <div className="carousel maxwidth">
                 <h4>Новинки</h4>
@@ -25,7 +25,7 @@ const Main = ({ goods, token }) => {
                     outsideChevron
                     chevronWidth={chevronWidth}
                 >
-                    {goods.filter(el => el.tags.includes("new")).map(g => <Card
+                    {goodsNew.map(g => <Card
                         key={g._id}
                         {...g}
                         img={g.pictures}
@@ -33,15 +33,13 @@ const Main = ({ goods, token }) => {
                 </ItemsCarousel>
             </div>}
             <div className="promo__container">
-                <Promo2 />
-                <Promo2 />
+                <Promo />
+                <Promo />
             </div>
-            {/* {goods.map(g => <Card
-                key={g._id}
-                {...g}
-                img={g.pictures}
-            />)} */}
-        </>
+            <div className="promo_big promo_none">
+                <Promo />
+            </div>
+        </div>
     )
 }
 

@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
 // страницы
-import Draft from "./pages/Draft";
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
@@ -16,6 +15,7 @@ const App = () => {
     const [modalActive, setModalActive] = useState(false);
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
+    const [goodsNew, setGoodsNew] = useState([]); //товары-новинки
 
     useEffect(() => {
         if (user) {
@@ -42,6 +42,21 @@ const App = () => {
     }, [token])
 
     useEffect(() => {
+        if (token) {
+            fetch("https://api.react-learning.ru/products", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setGoodsNew(data.products.filter(el => el.tags.includes("new")));
+                })
+        }
+    }, [token])
+
+    useEffect(() => {
         console.log("ook")
         setGoods(serverGoods);
     }, [serverGoods])
@@ -57,9 +72,8 @@ const App = () => {
             <main>
                 {/* <Searh  /> */}
                 <Routes>
-                    <Route path="/" element={<Main goods={goods} token = {token}/>} />
+                    <Route path="/" element={<Main goodsNew={goodsNew} goods={goods} token = {token}/>} />
                     <Route path="/catalog" element={<Catalog goods={goods} />} />
-                    <Route path="/draft" element={<Draft />} />
                     <Route path="/profile" element={
                         <Profile user={user} setUser={setUser} color="blue" />
                     } />

@@ -10,14 +10,23 @@
     height: 50px;
 }
 
+.wrapper__box {
+    width: 100vw;
+    background-color: #ffe44d;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
+}
+
 header {
+    width: 80%;
     display: flex;
     flex-direction: column;
-    background-color: #ffe44d;
     color: black;
     justify-content: space-between;
     padding: 10px 50px;
-    padding-bottom: 200px;
+    padding-bottom: 150px;
+    position: relative;
 }
 
 .header__nav {
@@ -25,6 +34,13 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+}
+
+.header__nav_scrolled {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .header__search {
@@ -35,6 +51,7 @@ header {
     width: 30%;
     max-width: 350px;
     margin-left: 10%;
+    margin-bottom: 20px;
 }
 
 .header__catalog {
@@ -59,12 +76,12 @@ header {
 }
 
 footer {
-    background-color: #ffe44d;
     color: black;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 50px;
+    width: 80%;
 }
 
 .footer__cop {
@@ -79,4 +96,64 @@ footer {
 
 .footer__cell div {
     text-align: center;
+}
+
+.footer__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer__contacts p,
+.footer__contacts h4 {
+    margin: 0;
+}
+
+.footer__menu {
+    display: none;
+}
+
+@media (max-width: 1040px) {
+    header {
+        width: 100%;
+        padding: 10px 10px;
+        padding-bottom: 80px;
+    }
+
+    .header__ban {
+        width: 90%;
+        max-width: 350px;
+        margin-left: 10%;
+        margin-bottom: 20px;
+        font-size: 0.8rem;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .footer__cell {
+        display: none;
+    }
+
+    .footer__contacts {
+        text-align: center;
+    }
+
+    .header__menu {
+        justify-content: space-around;
+    }
+
+    .footer__menu {
+        display: flex;
+        margin-top: 50px;
+        width: 100%;
+        box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
+        padding: 10px 0;
+    }
 }

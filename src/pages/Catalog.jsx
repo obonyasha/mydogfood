@@ -2,7 +2,7 @@ import Card from "../components/Card";
 
 const Catalog = ({ goods }) => {
     return (
-        <div className="container">
+        <div className="container maxwidth">
             {goods.map(g => <Card
                 key={g._id}
                 {...g}

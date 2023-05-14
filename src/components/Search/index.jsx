@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Binoculars } from "react-bootstrap-icons";
 import "./style.css"
 
-const Search = ({arr, upd}) => {
+const Search = ({ arr, upd }) => {
     // let text = "Corn";
     const [text, setText] = useState("");
     const [quantity, setQuantity] = useState(arr.length);
@@ -17,7 +18,6 @@ const Search = ({arr, upd}) => {
     const searchByText = (event) => {
         let val = event.target.value;
         setText(val);
-        // let result = arr.filter(el => el.name.toLowerCase().includes(val.toLowerCase()));
         let result = arr.filter(el => new RegExp(val, "i").test(el.name));
         upd(result);
         setQuantity(result.length);
@@ -26,7 +26,10 @@ const Search = ({arr, upd}) => {
     return (
         <div className="search__block">
             <input type="search" className="search" value={text} onChange={searchByText} placeholder="Поиск" />
-            <button onClick={click} className="transition"><Binoculars /></button>
+            <Link to="/catalog">
+                <button onClick={click} className="transition"><Binoculars /></button>
+            </Link>
+
             {/* <hr /> */}
             {/* <div>{text}, {n}, {count}</div> */}
             {/* <div>По Вашему запросу «{text}» найдено {quantity} подходящих товаров</div> */}
