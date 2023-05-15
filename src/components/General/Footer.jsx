@@ -29,10 +29,10 @@ const Footer = ({ token }) => {
                         <span className="transition"><Link to=""><Whatsapp /></Link></span>
                         <span className="transition"><Link to=""><Instagram /></Link></span>
                     </div>
+                    <div className="footer__cop footer__cop_desk">©{new Date().getFullYear()}</div>
                 </div>
-                <nav className="header__menu footer__menu">
-                    {/* Если пользователь === true */}
-                    {token && <>
+                {token &&
+                    <nav className="header__menu footer__menu">
                         <span className="transition">
                             <Link to="/" title="Главная">
                                 <HouseFill />
@@ -58,8 +58,8 @@ const Footer = ({ token }) => {
                                 <PersonCircle />
                             </Link>
                         </span>
-                    </>}
-                </nav>
+                    </nav>
+                }
             </footer>
         </div>
     )

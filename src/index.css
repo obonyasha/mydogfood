@@ -34,6 +34,7 @@ main {
 .main__wrapper {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 .container {
@@ -57,12 +58,18 @@ main {
 .promo_big {
   margin-top: -15%;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .promo__container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+}
+
+.promo__container p {
+  text-align: center;
+  margin: 0;
 }
 
 .promo_none {
@@ -83,12 +90,12 @@ main {
   }
 
   main {
-    margin: 0 auto;
     padding: 10px 0;
+    width: 100%;
   }
 
   .maxwidth {
-    max-width: 700px;
+    max-width: 1024px;
   }
 
   .promo__container {

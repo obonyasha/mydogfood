@@ -10,9 +10,9 @@ const Main = ({ goodsNew, token }) => {
     const chevronWidth = 40;
     return (
         <div className="main__wrapper maxwidth">
-            <div className="promo_big">
+            <p className="promo_big">
                 <Promo />
-            </div>
+            </p>
             {token && <div className="carousel maxwidth">
                 <h4>Новинки</h4>
                 <ItemsCarousel
@@ -33,7 +33,10 @@ const Main = ({ goodsNew, token }) => {
                 </ItemsCarousel>
             </div>}
             <div className="promo__container">
-                <Promo />
+                <p><Promo /></p>
+                <p><Promo /></p>
+            </div>
+            <div className="promo_big promo_none">
                 <Promo />
             </div>
             <div className="promo_big promo_none">

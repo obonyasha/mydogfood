@@ -86,7 +86,10 @@ footer {
 
 .footer__cop {
     font-size: 0.7rem;
+}
 
+.footer__cop_desk{
+    display: none;
 }
 
 .footer__cell {
@@ -117,7 +120,7 @@ footer {
     header {
         width: 100%;
         padding: 10px 10px;
-        padding-bottom: 80px;
+        padding-bottom: 130px;
     }
 
     .header__ban {
@@ -137,11 +140,16 @@ footer {
         padding-right: 0;
     }
 
+    .footer__cop_desk{
+        display: block;
+    }
+
     .footer__cell {
         display: none;
     }
 
     .footer__contacts {
+        margin-top: 10px;
         text-align: center;
     }
 
