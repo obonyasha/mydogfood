@@ -17,16 +17,20 @@ a {
 }
 
 #root {
-  max-width: 1350px;
   min-height: 100vh;
-  display: grid;
-  grid-auto-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  /* display: grid;
+  grid-template-rows: auto 1fr auto; */
 }
 
 main {
-  padding: 30px 10%;
+  max-width: 100%;
+  padding: 30px;
   display: flex;
-  align-content: flex-start;
   gap: 20px;
   justify-content: center;
 }

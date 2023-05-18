@@ -2,9 +2,11 @@ import Logo from "./Logo";
 import Search from "../Search";
 import { Link } from "react-router-dom";
 import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight, ChevronRight } from "react-bootstrap-icons";
+import Ctx from "../../contecst";
+import { useContext } from "react";
 
-const Header = ({ user, setModalActive, serverGoods, setGoods }) => {
-
+const Header = () => {
+    const { user, setGoods, setModalActive, serverGoods } = useContext(Ctx);
     const logIn = (e) => {
         e.preventDefault();
         localStorage.setItem("rockUser", "lk-band");

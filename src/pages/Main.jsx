@@ -1,12 +1,12 @@
 import Promo from "../components/Promo";
 import Card from "../components/Card";
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ItemsCarousel from 'react-items-carousel';
+import Ctx from "../contecst";
 
-
-
-const Main = ({ goodsNew, token }) => {
+const Main = () => {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
+    const { token, serverGoods } = useContext(Ctx);
     const chevronWidth = 40;
     return (
         <div className="main__wrapper maxwidth">
@@ -25,7 +25,7 @@ const Main = ({ goodsNew, token }) => {
                     outsideChevron
                     chevronWidth={chevronWidth}
                 >
-                    {goodsNew.map(g => <Card
+                    {serverGoods.filter(el => el.tags.includes("new")).map(g => <Card
                         key={g._id}
                         {...g}
                         img={g.pictures}

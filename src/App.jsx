@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import Ctx from "./contecst";
 // компоненты
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
@@ -15,7 +16,6 @@ const App = () => {
     const [modalActive, setModalActive] = useState(false);
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
-    const [goodsNew, setGoodsNew] = useState([]); //товары-новинки
 
     useEffect(() => {
         if (user) {
@@ -42,50 +42,37 @@ const App = () => {
     }, [token])
 
     useEffect(() => {
-        if (token) {
-            fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    setGoodsNew(data.products.filter(el => el.tags.includes("new")));
-                })
-        }
-    }, [token])
-
-    useEffect(() => {
         console.log("ook")
         setGoods(serverGoods);
     }, [serverGoods])
 
     return (
-        <>
+        <Ctx.Provider value={{
+            user,
+            setUser,
+            token,
+            modalActive,
+            setModalActive,
+            serverGoods,
+            goods,
+            setGoods
+        }}>
             <Header
-                user={user}
-                setModalActive={setModalActive}
-                serverGoods={serverGoods}
-                setGoods={setGoods}
             />
             <main>
                 {/* <Searh  /> */}
                 <Routes>
-                    <Route path="/" element={<Main goodsNew={goodsNew} goods={goods} token = {token}/>} />
-                    <Route path="/catalog" element={<Catalog goods={goods} />} />
+                    <Route path="/" element={<Main />} />
+                    <Route path="/catalog" element={<Catalog />} />
                     <Route path="/profile" element={
-                        <Profile user={user} setUser={setUser} color="blue" />
+                        <Profile color="blue" />
                     } />
                     <Route path="/product/:id" element={<Product />} />
                 </Routes>
             </main>
-            <Footer token = {token} />
-            <Modal
-                active={modalActive}
-                setActive={setModalActive}
-                setUser={setUser} />
-        </>
+            <Footer />
+            <Modal />
+        </Ctx.Provider>
     )
 }
 

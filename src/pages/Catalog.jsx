@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import Card from "../components/Card";
+import Ctx from "../contecst";
 
-const Catalog = ({ goods }) => {
+const Catalog = () => {
+    const { goods } = useContext(Ctx);
     return (
         <div className="container maxwidth">
             {goods.map(g => <Card

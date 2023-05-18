@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import Ctx from "../../contecst";
 
 
-const Modal = ({ active, setActive, setUser }) => {
+const Modal = () => {
 	const [auth, setAuth] = useState(true);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [pwd, setPwd] = useState("");
 	const [testPwd, setTestPwd] = useState("");
 	const navigate = useNavigate();
+	const { setUser } = useContext(Ctx);
+	const { modalActive, setModalActive } = useContext(Ctx);
 
 	const testAccess = {
 		color: pwd === testPwd ? "forestgreen" : "crimson"
@@ -71,18 +74,18 @@ const Modal = ({ active, setActive, setUser }) => {
 				if (!dataLog.err) {
 					localStorage.setItem("rockUser", dataLog.data.name);
 					localStorage.setItem("rockToken", dataLog.token);
-					localStorage.setItem("rockID", dataLog.data._id);
+					localStorage.setItem("rockId", dataLog.data._id);
 					clearForm();
-					setActive(false);
+					setModalActive(false);
 					setUser(dataLog.data.name);
 				}
 			} else {
 				if (!data.err) {
 					localStorage.setItem("rockUser", data.data.name);
 					localStorage.setItem("rockToken", data.token);
-					localStorage.setItem("rockID", data.data._id);
+					localStorage.setItem("rockId", data.data._id);
 					clearForm();
-					setActive(false);
+					setModalActive(false);
 					setUser(data.data.name);
 					navigate("/profile");
 				}
@@ -91,10 +94,10 @@ const Modal = ({ active, setActive, setUser }) => {
 	}
 	return <div
 		className="modal-wrapper"
-		style={{ display: active ? "flex" : "none" }}
+		style={{ display: modalActive ? "flex" : "none" }}
 	>
 		<div className="modal">
-			<button className="btn_close transition" onClick={() => setActive(false)}>х</button>
+			<button className="btn_close transition" onClick={() => setModalActive(false)}>х</button>
 			<h3>Авторизация</h3>
 			<form onSubmit={sendForm}>
 				{!auth && <label>

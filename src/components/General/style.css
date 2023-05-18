@@ -11,7 +11,7 @@
 }
 
 .wrapper__box {
-    width: 100vw;
+    width: 100%;
     background-color: #ffe44d;
     display: flex;
     justify-content: center;
@@ -88,7 +88,7 @@ footer {
     font-size: 0.7rem;
 }
 
-.footer__cop_desk{
+.footer__cop_desk {
     display: none;
 }
 
@@ -140,7 +140,7 @@ footer {
         padding-right: 0;
     }
 
-    .footer__cop_desk{
+    .footer__cop_desk {
         display: block;
     }
 

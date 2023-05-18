@@ -1,8 +1,12 @@
 import { BoxArrowInLeft } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
+import Ctx from "../contecst";
+import { useContext } from "react";
 
-const Profile = ({ user, color, setUser }) => {
-const navigate = useNavigate();
+const Profile = ({ color }) => {
+    const navigate = useNavigate();
+    const { user } = useContext(Ctx);
+    const { setUser } = useContext(Ctx);
 
     const logOut = (e) => {
         e.preventDefault();
