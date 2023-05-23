@@ -13,6 +13,7 @@
 
 .card__img {
     height: 150px;
+    max-width: 270px;
 }
 
 .card__btn {

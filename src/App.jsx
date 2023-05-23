@@ -54,6 +54,7 @@ const App = () => {
             modalActive,
             setModalActive,
             serverGoods,
+            setServerGoods,
             goods,
             setGoods
         }}>
