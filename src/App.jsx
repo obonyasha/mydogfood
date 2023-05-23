@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Ctx from "./contecst";
+import Ctx from "./context";
 // компоненты
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
@@ -9,19 +9,23 @@ import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import Favorites from "./pages/Favorites";
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
+    const [userId, setUserId] = useState(localStorage.getItem("rockId"));
     const [modalActive, setModalActive] = useState(false);
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
 
     useEffect(() => {
         if (user) {
-            setToken(localStorage.getItem("rockToken"))
+            setToken(localStorage.getItem("rockToken"));
+            setUserId(localStorage.getItem("rockId"))
         } else {
-            setToken("")
+            setToken("");
+            setUserId("")
         }
     }, [user])
 
@@ -51,6 +55,7 @@ const App = () => {
             user,
             setUser,
             token,
+            userId,
             modalActive,
             setModalActive,
             serverGoods,
@@ -60,8 +65,7 @@ const App = () => {
         }}>
             <Header
             />
-            <main>
-                {/* <Searh  /> */}
+            {/* <main> */}
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/catalog" element={<Catalog />} />
@@ -69,8 +73,9 @@ const App = () => {
                         <Profile color="blue" />
                     } />
                     <Route path="/product/:id" element={<Product />} />
+                    <Route path="/favorites" element={<Favorites />} />
                 </Routes>
-            </main>
+            {/* </main> */}
             <Footer />
             <Modal />
         </Ctx.Provider>

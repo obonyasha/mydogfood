@@ -1,6 +1,6 @@
 import { BoxArrowInLeft } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
-import Ctx from "../contecst";
+import Ctx from "../context";
 import { useContext } from "react";
 
 const Profile = ({ color }) => {

@@ -2,7 +2,7 @@ import Logo from "./Logo";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Telegram, Whatsapp, Instagram, Folder2, Star, Cart4, PersonCircle, HouseFill } from "react-bootstrap-icons";
-import Ctx from "../../contecst";
+import Ctx from "../../context";
 
 const Footer = () => {
     const { token } = useContext(Ctx);

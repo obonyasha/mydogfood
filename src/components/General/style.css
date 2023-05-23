@@ -75,6 +75,24 @@ header {
     font-size: 24px;
 }
 
+.badge__el {
+    position: relative;
+}
+.badge__item {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(68, 187, 28, 0.658);
+    color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    top: -30%;
+    right: -25%;
+}
+
 footer {
     color: black;
     display: flex;
@@ -107,10 +125,10 @@ footer {
     gap: 10px;
 }
 
-.footer__contacts p,
+/* .footer__contacts p,
 .footer__contacts h4 {
     margin: 0;
-}
+} */
 
 .footer__menu {
     display: none;

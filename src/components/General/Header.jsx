@@ -2,11 +2,18 @@ import Logo from "./Logo";
 import Search from "../Search";
 import { Link } from "react-router-dom";
 import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight, ChevronRight } from "react-bootstrap-icons";
-import Ctx from "../../contecst";
-import { useContext } from "react";
+import Ctx from "../../context";
+import { useContext, useState, useEffect } from "react";
 
 const Header = () => {
-    const { user, setGoods, setModalActive, serverGoods } = useContext(Ctx);
+    const { user, userId, setGoods, setModalActive, serverGoods } = useContext(Ctx);
+    const [likeCnt, setLikeCnt] = useState(0);
+    const [cardCnt, setCardCnt] = useState(0);
+
+    useEffect(() => {
+        setLikeCnt(serverGoods.filter(el => el.likes.includes(userId)).length)
+    }, [serverGoods])
+
     const logIn = (e) => {
         e.preventDefault();
         localStorage.setItem("rockUser", "lk-band");
@@ -30,13 +37,15 @@ const Header = () => {
                                 </Link>
                             </span>
                             <span className="transition">
-                                <Link to="/" title="Избранное">
+                                <Link to="/favorites" title="Избранное" className="badge__el">
                                     <Star />
+                                    <span className="badge__item">{likeCnt}</span>
                                 </Link>
                             </span>
                             <span className="transition">
-                                <Link to="/" title="Корзина">
+                                <Link to="/" title="Корзина" className="badge__el">
                                     <Cart4 />
+                                    <span className="badge__item">{cardCnt}</span>
                                 </Link>
                             </span>
                             <span className="transition">

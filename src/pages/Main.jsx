@@ -2,7 +2,7 @@ import Promo from "../components/Promo";
 import Card from "../components/Card";
 import React, { useState, useContext } from 'react';
 import ItemsCarousel from 'react-items-carousel';
-import Ctx from "../contecst";
+import Ctx from "../context";
 
 const Main = () => {
     const [activeItemIndex, setActiveItemIndex] = useState(0);

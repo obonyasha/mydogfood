@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Card from "../components/Card";
-import Ctx from "../contecst";
+import Ctx from "../context";
 
 const Catalog = () => {
     const { goods } = useContext(Ctx);

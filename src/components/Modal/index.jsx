@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import Ctx from "../../contecst";
+import Ctx from "../../context";
 
 
 const Modal = () => {
