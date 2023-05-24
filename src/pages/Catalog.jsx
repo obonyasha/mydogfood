@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
@@ -7,12 +7,17 @@ import usePagination from "../hooks/usePagination";
 import Ctx from "../context";
 
 const Catalog = () => {
-    const { goods } = useContext(Ctx);
+    const { goods, text } = useContext(Ctx);
     const paginate = usePagination(goods, 20);
+
+useEffect(() => {
+    paginate.step(1);
+}, [text])
+
     return (
         <div className="container maxwidth">
             <div style={{gridColumnEnd: "span 4"}}><Pagination hk={paginate}/></div>
-            {goods.map(g => <Card
+            {paginate.setDataPerPage().map(g => <Card
                 key={g._id}
                 {...g}
                 img={g.pictures}

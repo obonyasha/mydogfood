@@ -16,6 +16,7 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [userId, setUserId] = useState(localStorage.getItem("rockId"));
     const [modalActive, setModalActive] = useState(false);
+    const [text, setText] = useState(""); //поиск по сайту
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
 
@@ -58,6 +59,8 @@ const App = () => {
             userId,
             modalActive,
             setModalActive,
+            text,
+            setText,
             serverGoods,
             setServerGoods,
             goods,

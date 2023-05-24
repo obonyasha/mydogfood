@@ -1,20 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Binoculars } from "react-bootstrap-icons";
-import "./style.css"
+import "./style.css";
+import Ctx from "../../context";
 
 const Search = ({ arr, upd }) => {
-    // let text = "Corn";
-    const [text, setText] = useState("");
+    const {text, setText} = useContext(Ctx);
     const [quantity, setQuantity] = useState(arr.length);
 
-    const [count, updateCount] = useState(0);
-
-    let n = 1;
-    const click = () => {
-        console.log(n++);
-        updateCount(count + 1); //новое состояние
-    }
     const searchByText = (event) => {
         let val = event.target.value;
         setText(val);
@@ -27,7 +20,7 @@ const Search = ({ arr, upd }) => {
         <div className="search__block">
             <input type="search" className="search" value={text} onChange={searchByText} placeholder="Поиск" />
             <Link to="/catalog">
-                <button onClick={click} className="transition"><Binoculars /></button>
+                <button className="transition"><Binoculars /></button>
             </Link>
 
             {/* <hr /> */}
