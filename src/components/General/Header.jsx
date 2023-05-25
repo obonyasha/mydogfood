@@ -1,9 +1,9 @@
+import { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight } from "react-bootstrap-icons";
 import Logo from "./Logo";
 import Search from "../Search";
-import { Link } from "react-router-dom";
-import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight, ChevronRight } from "react-bootstrap-icons";
 import Ctx from "../../context";
-import { useContext, useState, useEffect } from "react";
 
 const Header = () => {
     const { user, userId, setGoods, setModalActive, serverGoods } = useContext(Ctx);
@@ -59,22 +59,6 @@ const Header = () => {
                             <BoxArrowInRight />
                         </a>}
                     </nav>
-                </div>
-                <div className="header__ban">
-                    <h1>Крафтовые лакомства для собак</h1>
-                    <h5>Всегда свежие лакомства ручной работы с доставкой по России и Миру</h5>
-                    {user &&
-                        <>
-                            <Link to="/catalog" title="Каталог">
-                                <div className="header__catalog transition">
-                                    Каталог&nbsp;
-                                    <span>
-                                        <ChevronRight />
-                                    </span>
-                                </div>
-                            </Link>
-                        </>
-                    }
                 </div>
             </header>
         </div>

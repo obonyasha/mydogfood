@@ -1,3 +1,5 @@
+@import url('../src/blocks/product.css');
+
 body {
   background-color: #fff;
   color: black;
@@ -41,6 +43,7 @@ main {
   justify-content: center;
   margin: 0 auto;
   margin-bottom: 30px;
+  gap: 20px;
 }
 
 .container {
@@ -99,76 +102,6 @@ main {
 
 .carousel {
   padding: 0 40px;
-}
-
-.wrapper__product {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 90%;
-  margin: 0 auto;
-  padding: 30px;
-  gap: 10px;
-}
-
-.product__block_team-gray{
-  background-color: #f6f7f9;
-  border-radius: 6px;
-  max-width: 320px;
-}
-
-
-.product__block {
-  display: flex;
-  gap: 20px;
-  padding: 10px;
-}
-
-.product__block_left {
-  width: 70%;
-}
-
-.product__block_rigth {
-  /* width: 50%; */
-  display: flex;
-  flex-direction: column;
-  gap: 10px
-}
-
-.product__img {
-  height: 400px;
-}
-
-.product__price {
-  display: flex;
-  flex-direction: column;
-}
-
-.product__price span {
-  color: crimson;
-  font-size: 1.5rem;
-}
-
-.product__add {
-  display: flex;
-  gap: 10px;
-  border: solid 0.5px darkgray;
-  border-radius: 26px;
-  cursor: pointer;
-  color: black;
-  height: 26px;
-  font-size: 1.25rem;
-  align-items: center;
-  padding: 5px;
-}
-
-.product__btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: darkgray;
-  font-size: 1.25rem;
-  vertical-align: middle;
 }
 
 .btn__gray {

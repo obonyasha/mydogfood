@@ -1,0 +1,140 @@
+.wrapper__product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px;
+    gap: 10px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.product__block_team-gray {
+    background-color: #f6f7f9;
+    border-radius: 6px;
+    max-width: 320px;
+}
+
+
+.product__block {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+}
+
+.product__block_left {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product__block_left h3 {
+    margin-bottom: 10px;
+}
+
+.product__block_rigth {
+    /* width: 50%; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.product__block .product__block_left p {
+    text-align: center;
+}
+
+.product__img {
+    height: 400px;
+}
+
+.product__price {
+    display: flex;
+    flex-direction: column;
+}
+
+.product__price span {
+    color: crimson;
+    font-size: 1.5rem;
+}
+
+.product__add {
+    display: flex;
+    gap: 10px;
+    border: solid 0.5px darkgray;
+    border-radius: 26px;
+    cursor: pointer;
+    color: black;
+    height: 26px;
+    font-size: 1.25rem;
+    align-items: center;
+    padding: 5px;
+}
+
+.product__btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: darkgray;
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+.product__char {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.product__char_row {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    width: 50%;
+    color: darkgray;
+}
+
+.product__char_row::before {
+    border-bottom: 1px dotted darkgray;
+    ;
+    bottom: 0.2em;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.product__char_row span {
+    background: #fff;
+    display: inline;
+    padding-right: 3px;
+    position: relative;
+}
+
+.product__add-reviews {
+    background-color: transparent;
+    border: 1px solid darkgray;
+    border-radius: 26px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 20%;
+    height: 2rem;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.product__add-reviews:hover {
+    background-color: #f6f7f9;
+}
+
+hr {
+    width: 100%;
+    color: #f6f7f9;
+}

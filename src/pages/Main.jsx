@@ -1,48 +1,59 @@
+import React, { useContext } from 'react';
+import Carousel from "better-react-carousel";
+import Ctx from "../context";
 import Promo from "../components/Promo";
 import Card from "../components/Card";
-import React, { useState, useContext } from 'react';
-import ItemsCarousel from 'react-items-carousel';
-import Ctx from "../context";
+import Banner from '../components/General/Banner';
 
 const Main = () => {
-    const [activeItemIndex, setActiveItemIndex] = useState(0);
     const { token, serverGoods } = useContext(Ctx);
-    const chevronWidth = 40;
     return (
-        <div className="main__wrapper maxwidth">
-            <p className="promo_big">
-                <Promo />
-            </p>
-            {token && <div className="carousel maxwidth">
-                <h4>Новинки</h4>
-                <ItemsCarousel
-                    requestToChangeActive={setActiveItemIndex}
-                    activeItemIndex={activeItemIndex}
-                    numberOfCards={2}
-                    gutter={20}
-                    leftChevron={<button>{'<'}</button>}
-                    rightChevron={<button>{'>'}</button>}
-                    outsideChevron
-                    chevronWidth={chevronWidth}
-                >
-                    {serverGoods.filter(el => el.tags.includes("new")).map(g => <Card
-                        key={g._id}
-                        {...g}
-                        img={g.pictures}
-                    />)}
-                </ItemsCarousel>
-            </div>}
-            <div className="promo__container">
-                <p><Promo /></p>
-                <p><Promo /></p>
+        <>
+            <Banner />
+            <div className="main__wrapper maxwidth">
+                <p className="promo_big">
+                    <Promo />
+                </p>
+                {token && <div className="carousel maxwidth">
+                    <h4>Новинки</h4>
+                    <Carousel cols={3} rows={1} gap={10} loop>
+                        {serverGoods.filter(el => el.tags.includes("new")).map((g, i) => <Carousel.Item key={i}>
+                            <Card
+                                key={g._id}
+                                {...g}
+                                img={g.pictures}
+                            />
+                        </Carousel.Item>)
+                        }
+                    </Carousel>
+                </div>}
+                <div className="promo__container">
+                    <p><Promo /></p>
+                    <p><Promo /></p>
+                </div>
+                <div className="promo_big promo_none">
+                    <Promo />
+                </div>
+                <div className="promo_big promo_none">
+                    <Promo />
+                </div>
+                {token &&
+                    <div className="carousel maxwidth">
+                        <h4>Товары со скидкой</h4>
+                        <Carousel cols={3} rows={1} gap={10} loop>
+                            {serverGoods.filter(el => el.tags.includes("sale")).map((g, i) => <Carousel.Item key={i}>
+                                <Card
+                                    key={g._id}
+                                    {...g}
+                                    img={g.pictures}
+                                />
+                            </Carousel.Item>)
+                            }
+                        </Carousel>
+                    </div>
+                }
             </div>
-            <div className="promo_big promo_none">
-                <Promo />
-            </div>
-            <div className="promo_big promo_none">
-                <Promo />
-            </div>
-        </div>
+        </>
     )
 }
 

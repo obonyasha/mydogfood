@@ -47,7 +47,6 @@ const App = () => {
     }, [token])
 
     useEffect(() => {
-        console.log("ook")
         setGoods(serverGoods);
     }, [serverGoods])
 
