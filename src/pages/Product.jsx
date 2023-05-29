@@ -56,7 +56,7 @@ const Product = () => {
                                         <del>{product.price}&nbsp;₽</del>
                                         <span className="font__bold">{product.price * (100 - product.discount) / 100}&nbsp;₽</span>
                                     </>
-                                    : <>{product.price}&nbsp;₽</>
+                                    : <p className="font__bold">{product.price}&nbsp;₽</p>
                                 }
                                 {/* &nbsp;₽ */}
                             </span>
@@ -66,12 +66,12 @@ const Product = () => {
                                     <span className="font__bold">{count}</span>
                                     <button className="product__btn" onClick={clickCountUp}><Plus /></button>
                                 </div>
-                                <button className="pay__btn transition font__bold">В корзину</button>
+                                <button className="pay__btn transition font__bold pay__btn_mobile">В корзину</button>
                             </div>
                             <button className="btn__gray" onClick={updLike}>
                                 {isLike ? <HeartFill /> : <Heart />}&nbsp;В избранное
                             </button>
-                            <div className="product__block product__block_team-gray">
+                            <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Truck /></span>
                                 <div className="product__block_rigth">
                                     <h4>Доставка по всему миру!</h4>
@@ -79,7 +79,7 @@ const Product = () => {
                                     <p>Доставка в пункт выдачи &mdash; <span className="font__bold">от 199&nbsp;₽</span></p>
                                 </div>
                             </div>
-                            <div className="product__block product__block_team-gray">
+                            <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Check2Circle /></span>
                                 <div className="product__block_rigth">
                                     <h4>Гарантия качества</h4>
@@ -102,6 +102,21 @@ const Product = () => {
                             <p>{product.wight}</p>
                         </div>
                     </div>
+                    <div className="product__block product__block_team-gray product__block_flex">
+                                <span className="font__gray"><Truck /></span>
+                                <div className="product__block_rigth">
+                                    <h4>Доставка по всему миру!</h4>
+                                    <p>Доставка курьером &mdash; <span className="font__bold">от 399&nbsp;₽</span></p>
+                                    <p>Доставка в пункт выдачи &mdash; <span className="font__bold">от 199&nbsp;₽</span></p>
+                                </div>
+                            </div>
+                            <div className="product__block product__block_team-gray product__block_flex">
+                                <span className="font__gray"><Check2Circle /></span>
+                                <div className="product__block_rigth">
+                                    <h4>Гарантия качества</h4>
+                                    <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
+                                </div>
+                            </div>
                     <div className="product__block_left">
                         <h3>Отзывы</h3>
                         <button className="product__add-reviews font__bold transition">Написать отзыв</button>

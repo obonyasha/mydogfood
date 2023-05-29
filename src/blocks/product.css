@@ -49,6 +49,10 @@
     text-align: center;
 }
 
+.product__block_flex {
+    display: none;
+}
+
 .product__img {
     height: 400px;
 }
@@ -58,12 +62,19 @@
     flex-direction: column;
 }
 
+.product__price p {
+    font-size: 1.2rem;
+    background-color: #f6f7f9;
+    width: 20%;
+}
+
 .product__price span {
     color: crimson;
     font-size: 1.5rem;
 }
 
 .product__add {
+    min-width: 105px;
     display: flex;
     gap: 10px;
     border: solid 0.5px darkgray;
@@ -137,4 +148,32 @@
 hr {
     width: 100%;
     color: #f6f7f9;
+}
+
+@media (max-width: 1040px) {
+    .product__block {
+        flex-direction: column;
+    }
+
+    .product__block_none {
+        display: none;
+    }
+
+    .product__block_flex {
+        display: flex;
+    }
+
+    .product__block_left {
+        width: 100%;
+    }
+
+    .product__price p,
+    .product__add {
+        width: 10%;
+    }
+
+    .product__add {
+        width: 18%;
+        justify-content: space-between;
+    }
 }

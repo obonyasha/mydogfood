@@ -16,7 +16,7 @@ useEffect(() => {
 
     return (
         <div className="container maxwidth">
-            <div style={{gridColumnEnd: "span 4"}}><Pagination hk={paginate}/></div>
+            <div className="container__pagination"><Pagination hk={paginate}/></div>
             {paginate.setDataPerPage().map(g => <Card
                 key={g._id}
                 {...g}
