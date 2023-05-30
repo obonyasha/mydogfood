@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { ChevronLeft, Plus, Dash, HeartFill, Heart, Truck, Check2Circle } from "react-bootstrap-icons";
+import Ctx from "../context";
 import CtxLike from "../contextLike";
 
 import Loader from "../components/Loader";
@@ -8,7 +9,11 @@ import Loader from "../components/Loader";
 const Product = () => {
     const [product, setProduct] = useState({});
     const [count, setCount] = useState(0);
+    const [text, setText] = useState("");
+    const [idRev, setIdRev] = useState("");
+    const [modalRevActive, setModalRevActive] = useState(false);
     const { id } = useParams();
+    const { userId, token } = useContext(Ctx);
     const { isLike, updLike } = useContext(CtxLike);
     const navigate = useNavigate();
 
@@ -23,10 +28,14 @@ const Product = () => {
 
     }
 
+    const clearForm = () => {
+        setText("");
+    }
+
     useEffect(() => {
         fetch(`https://api.react-learning.ru/products/${id}`, {
             headers: {
-                "Authorization": `Bearer ${localStorage.getItem("rockToken")}`
+                "Authorization": `Bearer ${token}`
             }
         })
             .then(res => res.json())
@@ -38,8 +47,43 @@ const Product = () => {
             })
     }, []);
 
+    const sendForm = (e) => {
+        e.preventDefault();
+        let body = {
+            text: text
+        }
+        fetch(`https://api.react-learning.ru/products/review/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+            })
+        clearForm();
+        setModalRevActive(false);
+    }
+
+    // const deleteRev = () => {
+    //     fetch(`https://api.react-learning.ru/products/review/${id}/6475d4fae0bf2c519bc51184`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             "Authorization": `Bearer ${token}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setProduct(data);
+    //         })
+    // }
+
     return (
-        <div className="wrapper__product maxwidth">
+        <div className="wrapper__product maxwidth"
+        >
             <button className="btn__gray" onClick={() => navigate(-1)}><ChevronLeft />&nbsp;Назад</button>
             {product.name
                 ?
@@ -103,39 +147,66 @@ const Product = () => {
                         </div>
                     </div>
                     <div className="product__block product__block_team-gray product__block_flex">
-                                <span className="font__gray"><Truck /></span>
-                                <div className="product__block_rigth">
-                                    <h4>Доставка по всему миру!</h4>
-                                    <p>Доставка курьером &mdash; <span className="font__bold">от 399&nbsp;₽</span></p>
-                                    <p>Доставка в пункт выдачи &mdash; <span className="font__bold">от 199&nbsp;₽</span></p>
-                                </div>
-                            </div>
-                            <div className="product__block product__block_team-gray product__block_flex">
-                                <span className="font__gray"><Check2Circle /></span>
-                                <div className="product__block_rigth">
-                                    <h4>Гарантия качества</h4>
-                                    <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
-                                </div>
-                            </div>
+                        <span className="font__gray"><Truck /></span>
+                        <div className="product__block_rigth">
+                            <h4>Доставка по всему миру!</h4>
+                            <p>Доставка курьером &mdash; <span className="font__bold">от 399&nbsp;₽</span></p>
+                            <p>Доставка в пункт выдачи &mdash; <span className="font__bold">от 199&nbsp;₽</span></p>
+                        </div>
+                    </div>
+                    <div className="product__block product__block_team-gray product__block_flex">
+                        <span className="font__gray"><Check2Circle /></span>
+                        <div className="product__block_rigth">
+                            <h4>Гарантия качества</h4>
+                            <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
+                        </div>
+                    </div>
                     <div className="product__block_left">
                         <h3>Отзывы</h3>
-                        <button className="product__add-reviews font__bold transition">Написать отзыв</button>
+                        <button className="product__add-reviews font__bold transition"
+                            onClick={() => setModalRevActive(true)}>Написать отзыв</button>
                         {(product.reviews.length > 0) ?
-                            product.reviews.map(el =>
-                                <>
+                            product.reviews.map((el, i) =>
+                                <div className="product__block_left" key={i}>
                                     <h4>{el.author.name}</h4>
                                     <p>{el.text}</p>
+                                    {/* {el.author._id === userId &&
+                                        <form onSubmit={deleteRev}>
+                                            <button className="modal-link maxwidth_btn">Удалить отзыв</button>
+                                        </form>
+                                    } */}
                                     <hr />
-                                </>
+                                </div>
                             )
                             :
                             <p>Пока здесь нет отзывов</p>
                         }
-
                     </div>
                 </div>
                 : <Loader />
             }
+            <div className="modal__reviews"
+                style={{ display: modalRevActive ? "flex" : "none" }}>
+                <div className="reviews">
+                    <button className="btn_close transition"
+                        onClick={() => setModalRevActive(false)}>х</button>
+                    <div className="reviews__product">
+                        <p><img src={product.pictures} alt={product.name} className="reviews__img" /></p>
+                        <div className="reviews__name">{product.name} </div>
+                    </div>
+                    <form onSubmit={sendForm}>
+                        <label>
+                            <h3>Ваш отзыв</h3>
+                            <textarea
+                                placeholder="Введите текст"
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                            />
+                        </label>
+                        <button className="modal-link maxwidth_btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

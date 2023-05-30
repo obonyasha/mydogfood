@@ -11,8 +11,7 @@ const Modal = () => {
 	const [pwd, setPwd] = useState("");
 	const [testPwd, setTestPwd] = useState("");
 	const navigate = useNavigate();
-	const { setUser } = useContext(Ctx);
-	const { modalActive, setModalActive } = useContext(Ctx);
+	const { setUser, modalActive, setModalActive } = useContext(Ctx);
 
 	const testAccess = {
 		color: pwd === testPwd ? "forestgreen" : "crimson"
