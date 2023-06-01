@@ -10,6 +10,7 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
+import Add from "./pages/AddProduct";
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
@@ -71,6 +72,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/add" element={<Add />} />
                     <Route path="/profile" element={
                         <Profile color="blue" />
                     } />

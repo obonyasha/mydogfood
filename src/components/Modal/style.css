@@ -33,7 +33,7 @@ form {
     gap: 20px;
 }
 
-form input {
+.modal__input {
     background: #f7f7f7;
     border: 1px solid #ebebeb;
     border-radius: 8px;

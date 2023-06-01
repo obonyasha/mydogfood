@@ -101,7 +101,7 @@ const Modal = () => {
 			<form onSubmit={sendForm}>
 				{!auth && <label>
 					Имя пользователя
-					<input
+					<input className="modal__input"
 						type="text"
 						value={name}
 						onChange={(e) => setName(e.target.value)}
@@ -109,7 +109,7 @@ const Modal = () => {
 				</label>}
 				<label>
 					Электронный адрес
-					<input
+					<input className="modal__input"
 						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -117,7 +117,7 @@ const Modal = () => {
 				</label>
 				<label>
 					Пароль
-					<input
+					<input className="modal__input"
 						type="password"
 						value={pwd}
 						onChange={(e) => setPwd(e.target.value)}
@@ -125,7 +125,7 @@ const Modal = () => {
 				</label>
 				{!auth && <label>
 					Повторить пароль
-					<input
+					<input className="modal__input"
 						type="password"
 						value={testPwd}
 						onChange={(e) => setTestPwd(e.target.value)}

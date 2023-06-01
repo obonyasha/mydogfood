@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight } from "react-bootstrap-icons";
+import { Folder2, Star, Cart4, PersonCircle, BoxArrowInRight, PlusSquare } from "react-bootstrap-icons";
 import Logo from "./Logo";
 import Search from "../Search";
 import Ctx from "../../context";
@@ -31,6 +31,11 @@ const Header = () => {
                     <nav className="header__menu">
                         {/* Если пользователь === true */}
                         {user && <>
+                            <span className="transition">
+                                <Link to="/add" title="Добавить товар">
+                                    <PlusSquare />
+                                </Link>
+                            </span>
                             <span className="transition">
                                 <Link to="/catalog" title="Каталог">
                                     <Folder2 />

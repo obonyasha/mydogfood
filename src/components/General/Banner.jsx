@@ -14,7 +14,7 @@ const Banner = () => {
                     <>
                         <Link to="/catalog" title="Каталог">
                             <div className="header__catalog transition">
-                                Каталог&nbsp;
+                                <span>Каталог&nbsp;</span>
                                 <span>
                                     <ChevronRight />
                                 </span>

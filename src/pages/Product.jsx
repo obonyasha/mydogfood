@@ -10,10 +10,9 @@ const Product = () => {
     const [product, setProduct] = useState({});
     const [count, setCount] = useState(0);
     const [text, setText] = useState("");
-    const [idRev, setIdRev] = useState("");
     const [modalRevActive, setModalRevActive] = useState(false);
     const { id } = useParams();
-    const { userId, token } = useContext(Ctx);
+    const { userId, token, setServerGoods } = useContext(Ctx);
     const { isLike, updLike } = useContext(CtxLike);
     const navigate = useNavigate();
 
@@ -25,7 +24,6 @@ const Product = () => {
         if (count > 0) {
             setCount(count - 1);
         }
-
     }
 
     const clearForm = () => {
@@ -68,18 +66,32 @@ const Product = () => {
         setModalRevActive(false);
     }
 
-    // const deleteRev = () => {
-    //     fetch(`https://api.react-learning.ru/products/review/${id}/6475d4fae0bf2c519bc51184`, {
-    //         method: "DELETE",
-    //         headers: {
-    //             "Authorization": `Bearer ${token}`
-    //         }
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setProduct(data);
-    //         })
-    // }
+    const deleteRev = (idRev) => {
+        fetch(`https://api.react-learning.ru/products/review/${product._id}/${idRev}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+            })
+    }
+
+    const delProduct = () => {
+        fetch("https://api.react-learning.ru/products/${id}", {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setServerGoods(prev => prev.filter(el => el._id !== id));
+                navigate("/catalog")
+            })
+    }
 
     return (
         <div className="wrapper__product maxwidth"
@@ -102,7 +114,6 @@ const Product = () => {
                                     </>
                                     : <p className="font__bold">{product.price}&nbsp;₽</p>
                                 }
-                                {/* &nbsp;₽ */}
                             </span>
                             <div className="product__block">
                                 <div className="product__add">
@@ -130,6 +141,11 @@ const Product = () => {
                                     <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
                                 </div>
                             </div>
+                            {userId === product.author._id &&
+                                <button className="product__add product__delete transition"
+                                    onClick={delProduct}
+                                >Удалить товар</button>}
+
                         </div>
 
                     </div>
@@ -170,11 +186,11 @@ const Product = () => {
                                 <div className="product__block_left" key={i}>
                                     <h4>{el.author.name}</h4>
                                     <p>{el.text}</p>
-                                    {/* {el.author._id === userId &&
-                                        <form onSubmit={deleteRev}>
-                                            <button className="modal-link maxwidth_btn">Удалить отзыв</button>
-                                        </form>
-                                    } */}
+                                    {el.author._id === userId &&
+                                        <div>
+                                            <button className="modal-link maxwidth_btn" onClick={() => deleteRev(el._id)}>Удалить отзыв</button>
+                                        </div>
+                                    }
                                     <hr />
                                 </div>
                             )

@@ -81,7 +81,7 @@
     border-radius: 26px;
     cursor: pointer;
     color: black;
-    height: 26px;
+    height: 36px;
     font-size: 1.25rem;
     align-items: center;
     padding: 5px;
@@ -94,6 +94,11 @@
     color: darkgray;
     font-size: 1.25rem;
     vertical-align: middle;
+}
+
+.product__delete {
+    align-self: flex-start;
+    box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
 }
 
 .product__char {
@@ -113,7 +118,6 @@
 
 .product__char_row::before {
     border-bottom: 1px dotted darkgray;
-    ;
     bottom: 0.2em;
     content: "";
     display: block;
@@ -205,6 +209,7 @@ hr {
 
     .product__block_flex {
         display: flex;
+        flex-direction: row;
     }
 
     .product__block_left {
@@ -217,7 +222,7 @@ hr {
     }
 
     .product__add {
-        width: 18%;
+        width: 20%;
         justify-content: space-between;
     }
 }

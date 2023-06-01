@@ -98,8 +98,8 @@ header {
     height: 16px;
     border-radius: 50%;
     font-size: 0.75rem;
-    top: -30%;
-    right: -25%;
+    top: 0;
+    right: -20%;
 }
 
 footer {
