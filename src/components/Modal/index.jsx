@@ -11,7 +11,7 @@ const Modal = () => {
 	const [pwd, setPwd] = useState("");
 	const [testPwd, setTestPwd] = useState("");
 	const navigate = useNavigate();
-	const { setUser, modalActive, setModalActive } = useContext(Ctx);
+	const { setUser, modalActive, setModalActive, api } = useContext(Ctx);
 
 	const testAccess = {
 		color: pwd === testPwd ? "forestgreen" : "crimson"
@@ -40,18 +40,18 @@ const Modal = () => {
 			body.name = name;
 			body.group = "group-12";
 		}
-		let log = "https://api.react-learning.ru/signin"; // вход
-		let reg = "https://api.react-learning.ru/signup"; // регистрация
+		// let log = "https://api.react-learning.ru/signin"; // вход
+		// let reg = "https://api.react-learning.ru/signup"; // регистрация
 
-		// Регистрация !== вход (после добавления пользователя в БД, нужно будет повторно войти в аккаунт)
-		let res = await fetch(auth ? log : reg, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(body)
-		})
-		let data = await res.json()
+		// // Регистрация !== вход (после добавления пользователя в БД, нужно будет повторно войти в аккаунт)
+		// let res = await fetch(auth ? log : reg, {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json"
+		// 	},
+		// 	body: JSON.stringify(body)
+		// })
+		let data = await (auth ? api.auth(body) : api.reg(body))
 		if (!data.err) {
 			// При регистрации с сервера приходит объект о пользователе {name, email, _id, group}
 			/* при входе с сервера приходит два параметра: 
@@ -62,14 +62,14 @@ const Modal = () => {
 			if (!auth) {
 				delete body.name;
 				delete body.group
-				let resLog = await fetch(log, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(body)
-				})
-				let dataLog = await resLog.json()
+				// let resLog = await fetch(log, {
+				// 	method: "POST",
+				// 	headers: {
+				// 		"Content-Type": "application/json"
+				// 	},
+				// 	body: JSON.stringify(body)
+				// })
+				let dataLog = await (api.auth(body))
 				if (!dataLog.err) {
 					localStorage.setItem("rockUser", dataLog.data.name);
 					localStorage.setItem("rockToken", dataLog.token);
@@ -95,7 +95,7 @@ const Modal = () => {
 		className="modal-wrapper"
 		style={{ display: modalActive ? "flex" : "none" }}
 	>
-		<div className="modal">
+		<div className="my-modal">
 			<button className="btn_close transition" onClick={() => setModalActive(false)}>х</button>
 			<h3>Авторизация</h3>
 			<form onSubmit={sendForm}>

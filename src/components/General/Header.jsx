@@ -48,7 +48,7 @@ const Header = () => {
                                 </Link>
                             </span>
                             <span className="transition">
-                                <Link to="/" title="Корзина" className="badge__el">
+                                <Link to="/basket" title="Корзина" className="badge__el">
                                     <Cart4 />
                                     <span className="badge__item">{cardCnt}</span>
                                 </Link>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Ctx from "./context";
+import Api from "./api";
 // компоненты
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
@@ -11,6 +12,7 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
 import Add from "./pages/AddProduct";
+import Basket from "./pages/Basket";
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
@@ -20,6 +22,7 @@ const App = () => {
     const [text, setText] = useState(""); //поиск по сайту
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
+    const [api, setApi] = useState(new Api(token));
 
     useEffect(() => {
         if (user) {
@@ -33,19 +36,19 @@ const App = () => {
 
     // useEffect срабатывает каждый раз, когда компонент создался или перерисовался
     useEffect(() => {
-        if (token) {
-            fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
+        setApi(new Api(token))
+    }, [token])
+
+
+    useEffect(() => {
+        if (api.token) {
+            api.getProguct()
                 .then(data => {
                     console.log(data);
                     setServerGoods(data.products);
                 })
         }
-    }, [token])
+    }, [api.token])
 
     useEffect(() => {
         setGoods(serverGoods);
@@ -64,21 +67,23 @@ const App = () => {
             serverGoods,
             setServerGoods,
             goods,
-            setGoods
+            setGoods,
+            api
         }}>
             <Header
             />
             {/* <main> */}
-                <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/catalog" element={<Catalog />} />
-                    <Route path="/add" element={<Add />} />
-                    <Route path="/profile" element={
-                        <Profile color="blue" />
-                    } />
-                    <Route path="/product/:id" element={<Product />} />
-                    <Route path="/favorites" element={<Favorites />} />
-                </Routes>
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/catalog" element={<Catalog />} />
+                <Route path="/add" element={<Add />} />
+                <Route path="/profile" element={
+                    <Profile color="blue" />
+                } />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/basket" element={<Basket />} />
+            </Routes>
             {/* </main> */}
             <Footer />
             <Modal />

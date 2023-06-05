@@ -6,20 +6,21 @@ import Ctx from "../../context";
 import CtxLike from "../../contextLike";
 
 const Card = ({ img, name, price, _id, discount, tags, likes }) => {
-    const { token, setServerGoods } = useContext(Ctx);
+    const { setServerGoods , api} = useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
 
     const updLike = (e) => {
         e.stopPropagation();
         e.preventDefault();
         setIsLike(!isLike);
-        fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-            method: isLike ? "DELETE" : "PUT",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
+        // fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
+        //     method: isLike ? "DELETE" : "PUT",
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // })
+        //     .then(res => res.json())
+        api.setLike(_id, !isLike)
             .then(data => {
                 console.log(data);
                 setServerGoods(function (old) {

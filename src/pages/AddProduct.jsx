@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Ctx from "../context";
 
 const Add = () => {
-    const { token } = useContext(Ctx);
+    const { token, setServerGoods, api } = useContext(Ctx);
     const navigate = useNavigate();
     const [description, setDescription] = useState("Тут пусто");
     const [discount, setDiscount] = useState(0);
@@ -61,18 +61,20 @@ const Add = () => {
             description,
             tags: tag.length && !tags.includes(tag) ? [...tags, tag] : tags
         }
-        fetch("https://api.react-learning.ru/products", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(body)
-        })
-            .then(res => res.json())
+        // fetch("https://api.react-learning.ru/products", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Authorization": `Bearer ${token}`
+        //     },
+        //     body: JSON.stringify(body)
+        // })
+        //     .then(res => res.json())
+            api.addProduct(body)
             .then(data => {
                 console.log(data);
                 if (!data.err && !data.error) {
+                    setServerGoods(prev => [data, ...prev]);
                     clearForm();
                     navigate(`/product/${data._id}`)
                 }
@@ -92,10 +94,12 @@ const Add = () => {
                     <Col xs={12} sm={6}>
                         <Form.Group className="my-3">
                             <Form.Label htmlFor="name">Название товара</Form.Label>
-                            <Form.Control type="text"
+                            <Form.Control
+                                type="text"
                                 id="name"
                                 value={name}
-                                onChange={(e) => setName(e.target.value)} />
+                                onChange={(e) => setName(e.target.value)}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label htmlFor="price">Цена</Form.Label>
@@ -107,7 +111,7 @@ const Add = () => {
                                 onChange={(e) => setPrice(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label htmlFor="name">Скидка</Form.Label>
+                            <Form.Label htmlFor="discount">Скидка</Form.Label>
                             <Form.Select
                                 id="discount"
                                 defaultValue={discount}
@@ -124,7 +128,7 @@ const Add = () => {
                             </Form.Select>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label htmlFor="name">Вес</Form.Label>
+                            <Form.Label htmlFor="wight">Вес</Form.Label>
                             <Form.Control
                                 type="text"
                                 id="wight"
@@ -133,7 +137,7 @@ const Add = () => {
                             <Form.Text>Вес прописывается с единицами измерения!</Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label htmlFor="name">Количество на складе</Form.Label>
+                            <Form.Label htmlFor="stock">Количество на складе</Form.Label>
                             <Form.Control
                                 type="number"
                                 id="stock"

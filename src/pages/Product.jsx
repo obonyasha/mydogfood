@@ -12,7 +12,7 @@ const Product = () => {
     const [text, setText] = useState("");
     const [modalRevActive, setModalRevActive] = useState(false);
     const { id } = useParams();
-    const { userId, token, setServerGoods } = useContext(Ctx);
+    const { userId, setServerGoods, api } = useContext(Ctx);
     const { isLike, updLike } = useContext(CtxLike);
     const navigate = useNavigate();
 
@@ -31,12 +31,13 @@ const Product = () => {
     }
 
     useEffect(() => {
-        fetch(`https://api.react-learning.ru/products/${id}`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
+        // fetch(`https://api.react-learning.ru/products/${id}`, {
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // })
+        //     .then(res => res.json())
+        api.getSingleProduct(id)
             .then(data => {
                 if (!data.err) {
                     console.log(data);
@@ -50,15 +51,16 @@ const Product = () => {
         let body = {
             text: text
         }
-        fetch(`https://api.react-learning.ru/products/review/${id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(body)
-        })
-            .then(res => res.json())
+        // fetch(`https://api.react-learning.ru/products/review/${id}`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Authorization": `Bearer ${token}`
+        //     },
+        //     body: JSON.stringify(body)
+        // })
+        //     .then(res => res.json())
+        api.addReview(id, body)
             .then(data => {
                 setProduct(data);
             })
@@ -67,26 +69,28 @@ const Product = () => {
     }
 
     const deleteRev = (idRev) => {
-        fetch(`https://api.react-learning.ru/products/review/${product._id}/${idRev}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
+        // fetch(`https://api.react-learning.ru/products/review/${product._id}/${idRev}`, {
+        //     method: "DELETE",
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // })
+        //     .then(res => res.json())
+        api.delReview(id, idRev)
             .then(data => {
                 setProduct(data);
             })
     }
 
     const delProduct = () => {
-        fetch("https://api.react-learning.ru/products/${id}", {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
-            .then(res => res.json())
+        // fetch("https://api.react-learning.ru/products/${id}", {
+        //     method: "DELETE",
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // })
+        //     .then(res => res.json())
+        api.delProduct(id)
             .then(data => {
                 setServerGoods(prev => prev.filter(el => el._id !== id));
                 navigate("/catalog")
