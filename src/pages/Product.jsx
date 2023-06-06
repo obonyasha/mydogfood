@@ -109,7 +109,7 @@ const Product = () => {
                             <h2>{product.name}</h2>
                             <p><img src={product.pictures} alt={product.name} className="product__img" /></p>
                         </div>
-                        <div className="product__block_rigth">
+                        <div className="block__rigth">
                             <span className="product__price">
                                 {product.discount > 0
                                     ? <>
@@ -133,7 +133,7 @@ const Product = () => {
                             <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Truck /></span>
                                 <div className="product__block_rigth">
-                                    <h4>Доставка по всему миру!</h4>
+                                    <h5>Доставка по всему миру!</h5>
                                     <p>Доставка курьером &mdash; <span className="font__bold">от 399&nbsp;₽</span></p>
                                     <p>Доставка в пункт выдачи &mdash; <span className="font__bold">от 199&nbsp;₽</span></p>
                                 </div>
@@ -141,7 +141,7 @@ const Product = () => {
                             <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Check2Circle /></span>
                                 <div className="product__block_rigth">
-                                    <h4>Гарантия качества</h4>
+                                    <h5>Гарантия качества</h5>
                                     <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
                                 </div>
                             </div>

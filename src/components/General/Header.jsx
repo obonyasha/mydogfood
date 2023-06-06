@@ -6,13 +6,21 @@ import Search from "../Search";
 import Ctx from "../../context";
 
 const Header = () => {
-    const { user, userId, setGoods, setModalActive, serverGoods } = useContext(Ctx);
+    const { user, userId, setGoods, setModalActive, serverGoods, basket } = useContext(Ctx);
     const [likeCnt, setLikeCnt] = useState(0);
     const [cardCnt, setCardCnt] = useState(0);
 
     useEffect(() => {
         setLikeCnt(serverGoods.filter(el => el.likes.includes(userId)).length)
     }, [serverGoods])
+
+    useEffect(() => {
+        let cnt = 0;
+        for (let i = 0; i < basket.length; i++) {
+            cnt += basket[i].cnt
+        }
+        setCardCnt(cnt);
+    }, [basket])
 
     const logIn = (e) => {
         e.preventDefault();

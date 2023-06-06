@@ -10,7 +10,7 @@
     position: relative;
     align-items: center;
     justify-content: space-between;
-    border: none!important;
+    border: none !important;
 }
 
 .card:hover {
@@ -44,4 +44,9 @@
 
 .card__name {
     word-wrap: break-word;
+}
+
+.card__btn:disabled {
+    opacity: .6;
+    cursor: default;
 }

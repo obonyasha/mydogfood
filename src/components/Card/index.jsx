@@ -5,9 +5,25 @@ import { Heart, HeartFill, Percent } from "react-bootstrap-icons";
 import Ctx from "../../context";
 import CtxLike from "../../contextLike";
 
-const Card = ({ img, name, price, _id, discount, tags, likes }) => {
-    const { setServerGoods , api} = useContext(Ctx);
+const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
+    const { setServerGoods, api, setBasket, serverGoods, basket } = useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
+    const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0);
+
+    const addToBasket = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setInBasket(true);
+        setBasket(prev => [...prev, {
+            id: _id,
+            cnt: 1,
+            name: name,
+            img: img,
+            price: price,
+            discount: discount,
+            wight: wight
+        }])
+    }
 
     const updLike = (e) => {
         e.stopPropagation();
@@ -59,7 +75,10 @@ const Card = ({ img, name, price, _id, discount, tags, likes }) => {
                     }
                     &nbsp;₽
                 </span>
-                <button className="pay__btn transition">В корзину</button>
+                <button className="pay__btn card__btn transition"
+                    onClick={addToBasket}
+                    disabled ={inBasket}
+                >В корзину</button>
                 {/* <span className="card__tags">
                 {tags.map(el => <span key={el}>{el}</span>)}
             </span> */}
