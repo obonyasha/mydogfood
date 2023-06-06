@@ -14,7 +14,7 @@ const Basket = () => {
     const endSum = basket.reduce((acc, el) => {
         return acc + el.cnt * el.price * (1 - el.discount / 100)
     }, 0)
-    const sale = sum - endSum;
+    const sale = endSum - sum;
 
     const inc = (id) => {
         setBasket(prev => prev.map(el => {
@@ -36,10 +36,26 @@ const Basket = () => {
             }))
         }
     }
+
+    // const textAge = (age) => {
+    //     if (age % 100 >= 5 && age % 100 <= 20) {
+    //         return age + ' лет';
+    //     } else {
+    //         age % 100 == age % 100 % 10;
+    //         if (age % 100 == 1) {
+    //             return age + ' год';
+    //         } else if (age % 100 >= 2 && age % 100 <= 4) {
+    //             return age + ' года';
+    //         } else {
+    //             return age + ' лет';
+    //         }
+    //     }
+    // }
+
     return (
         <div className="wrapper__product">
             <h1>
-                0 товаров в корзине
+                {basket.length} товаров в корзине
             </h1>
             <div className="product__block">
                 <div className="basket__block_left">
@@ -60,10 +76,10 @@ const Basket = () => {
                             <span className="basket__price">
                                 {el.discount > 0
                                     ? <>
-                                        <del>{el.price}&nbsp;₽</del>
-                                        <span className="font__bold">{el.price * (100 - el.discount) / 100}&nbsp;₽</span>
+                                        <del>{el.price*el.cnt}&nbsp;₽</del>
+                                        <span className="font__bold">{(el.price * (100 - el.discount) / 100)*el.cnt}&nbsp;₽</span>
                                     </>
-                                    : <p className="font__bold">{el.price}&nbsp;₽</p>
+                                    : <p className="font__bold">{el.price*el.cnt}&nbsp;₽</p>
                                 }
                             </span>
                             <button className="transition basket__delete"
@@ -82,7 +98,7 @@ const Basket = () => {
                         </div>
                         <div className="basket__block">
                             <p className="btn__grey">Скидка</p>
-                            <p>{sale}₽</p>
+                            <span>{sale} ₽</span>
                         </div>
                         <hr />
                         <div className="basket__block">

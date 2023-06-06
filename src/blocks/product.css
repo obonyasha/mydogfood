@@ -81,7 +81,7 @@
 .product__add {
     min-width: 105px;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     border: solid 0.5px darkgray;
     border-radius: 26px;
     cursor: pointer;
@@ -90,6 +90,7 @@
     font-size: 1.25rem;
     align-items: center;
     padding: 5px;
+    justify-content: space-between;
 }
 
 .product__btn {
