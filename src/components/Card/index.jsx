@@ -3,10 +3,9 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons";
 import Ctx from "../../context";
-import CtxLike from "../../contextLike";
 
 const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
-    const { setServerGoods, api, setBasket, serverGoods, basket } = useContext(Ctx);
+    const { setServerGoods, api, setBasket, basket } = useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
     const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0);
 
@@ -53,10 +52,6 @@ const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
     }
 
     return (
-        <CtxLike.Provider value={{
-            isLike,
-            updLike
-        }}>
             <Link className="card" to={`/product/${_id}`}>
                 {discount > 0 && <span className="card__discount"><Percent />{discount}</span>}
                 <span className="card__like" onClick={updLike}>
@@ -78,13 +73,11 @@ const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
                 <button className="pay__btn card__btn transition"
                     onClick={addToBasket}
                     disabled ={inBasket}
-                >В корзину</button>
+                >{inBasket ? "В корзине" : "В корзину"}</button>
                 {/* <span className="card__tags">
                 {tags.map(el => <span key={el}>{el}</span>)}
             </span> */}
             </Link>
-        </CtxLike.Provider>
-
     )
 }
 

@@ -137,6 +137,7 @@ main {
 }
 
 .pay__btn {
+  width: 160px;
   border: none;
   outline: none;
   height: 36px;
@@ -147,6 +148,10 @@ main {
   display: inline-block;
   padding: 5px 36px;
   box-shadow: 0px 1px 6px 1px rgba(34, 60, 80, 0.2);
+}
+
+.pay__btn_basket{
+  width: 200px;
 }
 
 .pay__btn:hover {
@@ -188,9 +193,5 @@ hr {
 
   .container__pagination {
     grid-column-end: span 3;
-  }
-
-  .pay__btn_mobile {
-    width: 20%;
   }
 }

@@ -24,13 +24,16 @@ const App = () => {
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
     const [api, setApi] = useState(new Api(token));
 
+
     let bStore = localStorage.getItem("rockBasket");
     if (bStore) {
         bStore = JSON.parse(bStore);
     } else {
         bStore = []
     }
+
     const [basket, setBasket] = useState(bStore);
+
 
     useEffect(() => {
         localStorage.setItem("rockBasket", JSON.stringify(basket));

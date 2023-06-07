@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { ChevronLeft, Plus, Dash, HeartFill, Heart, Truck, Check2Circle } from "react-bootstrap-icons";
 import Ctx from "../context";
-import CtxLike from "../contextLike";
 
 import Loader from "../components/Loader";
 
@@ -13,7 +12,6 @@ const Product = () => {
     const [modalRevActive, setModalRevActive] = useState(false);
     const { id } = useParams();
     const { userId, setServerGoods, api } = useContext(Ctx);
-    const { isLike, updLike } = useContext(CtxLike);
     const navigate = useNavigate();
 
     const clickCountUp = () => {
@@ -127,8 +125,8 @@ const Product = () => {
                                 </div>
                                 <button className="pay__btn transition font__bold pay__btn_mobile">В корзину</button>
                             </div>
-                            <button className="btn__gray" onClick={updLike}>
-                                {isLike ? <HeartFill /> : <Heart />}&nbsp;В избранное
+                            <button className="btn__gray">
+                                <HeartFill /> &nbsp;В избранное
                             </button>
                             <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Truck /></span>

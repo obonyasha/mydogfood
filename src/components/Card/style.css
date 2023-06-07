@@ -49,4 +49,5 @@
 .card__btn:disabled {
     opacity: .6;
     cursor: default;
+    content: "В корзине";
 }
