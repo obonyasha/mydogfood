@@ -1,7 +1,6 @@
 import { Trash3, Dash, Plus, Truck, EmojiFrown } from "react-bootstrap-icons";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import Ctx from "../context";
 
 

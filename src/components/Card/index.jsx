@@ -3,6 +3,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons";
 import Ctx from "../../context";
+import updLike from "../../utils/updLike";
 
 const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
     const { setServerGoods, api, setBasket, basket } = useContext(Ctx);
@@ -24,37 +25,37 @@ const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
         }])
     }
 
-    const updLike = (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        setIsLike(!isLike);
-        // fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-        //     method: isLike ? "DELETE" : "PUT",
-        //     headers: {
-        //         "Authorization": `Bearer ${token}`
-        //     }
-        // })
-        //     .then(res => res.json())
-        api.setLike(_id, !isLike)
-            .then(data => {
-                console.log(data);
-                setServerGoods(function (old) {
-                    const arr = old.map(el => {
-                        if (el._id === _id) {
-                            return data;
-                        } else {
-                            return el
-                        }
-                    });
-                    return arr;
-                })
-            })
-    }
+    // const updLike = (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     setIsLike(!isLike);
+    //     // fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
+    //     //     method: isLike ? "DELETE" : "PUT",
+    //     //     headers: {
+    //     //         "Authorization": `Bearer ${token}`
+    //     //     }
+    //     // })
+    //     //     .then(res => res.json())
+    //     api.setLike(_id, !isLike)
+    //         .then(data => {
+    //             console.log(data);
+    //             setServerGoods(function (old) {
+    //                 const arr = old.map(el => {
+    //                     if (el._id === _id) {
+    //                         return data;
+    //                     } else {
+    //                         return el
+    //                     }
+    //                 });
+    //                 return arr;
+    //             })
+    //         })
+    // }
 
     return (
             <Link className="card" to={`/product/${_id}`}>
                 {discount > 0 && <span className="card__discount"><Percent />{discount}</span>}
-                <span className="card__like" onClick={updLike}>
+                <span className="card__like" onClick={(e) => updLike(e, !isLike, setIsLike, setServerGoods, _id, api)}>
                     {isLike ? <HeartFill /> : <Heart />}
                 </span>
                 <img src={img} alt="Картинка" className="card__img" />

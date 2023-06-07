@@ -11,7 +11,7 @@ const usePagination = (data, cnt) => {
         setCurrent(page)
     }
 
-    //ф-я дляперехода на предыдущую страницу
+    //ф-я для перехода на предыдущую страницу
     const prev = () => {
         const prevPage = Math.max(current - 1, 1);//не выходи за рамки 1 страницы
         setCurrent(prevPage)

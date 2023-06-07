@@ -34,7 +34,6 @@ const App = () => {
 
     const [basket, setBasket] = useState(bStore);
 
-
     useEffect(() => {
         localStorage.setItem("rockBasket", JSON.stringify(basket));
     }, [basket])

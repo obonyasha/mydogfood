@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { ChevronLeft, Plus, Dash, HeartFill, Heart, Truck, Check2Circle } from "react-bootstrap-icons";
 import Ctx from "../context";
+import updLike from "../utils/updLike";
 
 import Loader from "../components/Loader";
 
@@ -9,6 +10,7 @@ const Product = () => {
     const [product, setProduct] = useState({});
     const [count, setCount] = useState(0);
     const [text, setText] = useState("");
+    const [isLike, setIsLike] = useState(false);
     const [modalRevActive, setModalRevActive] = useState(false);
     const { id } = useParams();
     const { userId, setServerGoods, api } = useContext(Ctx);
@@ -40,6 +42,7 @@ const Product = () => {
                 if (!data.err) {
                     console.log(data);
                     setProduct(data);
+                    setIsLike(data.likes.includes(localStorage.getItem("rockId")));
                 }
             })
     }, []);
@@ -125,8 +128,10 @@ const Product = () => {
                                 </div>
                                 <button className="pay__btn transition font__bold pay__btn_mobile">В корзину</button>
                             </div>
-                            <button className="btn__gray">
-                                <HeartFill /> &nbsp;В избранное
+                            <button className="btn__gray"
+                            onClick={(e) => updLike(e, !isLike, setIsLike, setServerGoods, product._id, api)}
+                            >
+                                {isLike ? <HeartFill /> : <Heart />} &nbsp;В избранное
                             </button>
                             <div className="product__block product__block_team-gray product__block_none">
                                 <span className="font__gray"><Truck /></span>
