@@ -3,55 +3,14 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons";
 import Ctx from "../../context";
+import addToBasket from "../../utils/addToBasket";
 import updLike from "../../utils/updLike";
 
 const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
     const { setServerGoods, api, setBasket, basket } = useContext(Ctx);
     const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
     const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0);
-
-    const addToBasket = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setInBasket(true);
-        setBasket(prev => [...prev, {
-            id: _id,
-            cnt: 1,
-            name: name,
-            img: img,
-            price: price,
-            discount: discount,
-            wight: wight
-        }])
-    }
-
-    // const updLike = (e) => {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     setIsLike(!isLike);
-    //     // fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-    //     //     method: isLike ? "DELETE" : "PUT",
-    //     //     headers: {
-    //     //         "Authorization": `Bearer ${token}`
-    //     //     }
-    //     // })
-    //     //     .then(res => res.json())
-    //     api.setLike(_id, !isLike)
-    //         .then(data => {
-    //             console.log(data);
-    //             setServerGoods(function (old) {
-    //                 const arr = old.map(el => {
-    //                     if (el._id === _id) {
-    //                         return data;
-    //                     } else {
-    //                         return el
-    //                     }
-    //                 });
-    //                 return arr;
-    //             })
-    //         })
-    // }
-
+    const cntProd = basket.filter(el => el.id === _id)[0].cnt
     return (
             <Link className="card" to={`/product/${_id}`}>
                 {discount > 0 && <span className="card__discount"><Percent />{discount}</span>}
@@ -71,8 +30,8 @@ const Card = ({ img, name, price, _id, discount, wight, tags, likes }) => {
                     }
                     &nbsp;₽
                 </span>
-                <button className="pay__btn card__btn transition"
-                    onClick={addToBasket}
+                <button className="pay__btn transition"
+                    onClick={(e) => addToBasket(e, setInBasket, setBasket, _id, name, img, price, discount, wight, cntProd)}
                     disabled ={inBasket}
                 >{inBasket ? "В корзине" : "В корзину"}</button>
                 {/* <span className="card__tags">

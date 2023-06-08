@@ -11,7 +11,6 @@ export default (e, state, setIsLike, setServerGoods, _id, api) => {
     //     .then(res => res.json())
     api.setLike(_id, state)
         .then(data => {
-            console.log(data);
             setServerGoods(function (old) {
                 const arr = old.map(el => {
                     if (el._id === _id) {

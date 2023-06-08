@@ -46,8 +46,8 @@
     word-wrap: break-word;
 }
 
-.card__btn:disabled {
+/* .card__btn:disabled {
     opacity: .6;
     cursor: default;
     content: "В корзине";
-}
+} */

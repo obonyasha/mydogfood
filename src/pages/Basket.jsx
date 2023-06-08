@@ -2,6 +2,8 @@ import { Trash3, Dash, Plus, Truck, EmojiFrown } from "react-bootstrap-icons";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Ctx from "../context";
+import inc from "../utils/inc";
+import dec from "../utils/dec";
 
 
 const Basket = () => {
@@ -18,29 +20,30 @@ const Basket = () => {
         return acc + el.cnt
     }, 0)
 
-    const inc = (id) => {
-        setBasket(prev => prev.map(el => {
-            if (el.id === id) {
-                el.cnt++;
-            }
-            return el;
-        }))
-    }
-    const dec = (id, cnt) => {
-        if (cnt === 1) {
-            setBasket(prev => prev.filter(el => el.id !== id))
-        } else {
-            setBasket(prev => prev.map(el => {
-                if (el.id === id) {
-                    el.cnt--;
-                }
-                return el;
-            }))
-        }
-    }
+    // const inc = (id) => {
+    //     setBasket(prev => prev.map(el => {
+    //         if (el.id === id) {
+    //             el.cnt++;
+    //         }
+    //         return el;
+    //     }))
+    // }
+    // const dec = (id, cnt) => {
+    //     if (cnt === 1) {
+    //         setBasket(prev => prev.filter(el => el.id !== id))
+    //     } else {
+    //         setBasket(prev => prev.map(el => {
+    //             if (el.id === id) {
+    //                 el.cnt--;
+    //             }
+    //             return el;
+    //         }))
+    //     }
+    // }
 
     const delProd = (id) => {
         setBasket(prev => prev.filter(el => el.id !== id))
+        console.log(basket)
     }
 
     const clearBasket = () => {
@@ -78,9 +81,9 @@ const Basket = () => {
                                     <p className="btn__grey">{el.wight}</p>
                                 </div>
                                 <div className="product__add">
-                                    <button className="product__btn" onClick={() => dec(el.id, el.cnt)}><Dash /></button>
+                                    <button className="product__btn" onClick={() => dec(el.id, el.cnt, setBasket)}><Dash /></button>
                                     <span className="font__bold">{el.cnt}</span>
-                                    <button className="product__btn" onClick={() => inc(el.id)}><Plus /></button>
+                                    <button className="product__btn" onClick={() => inc(el.id, setBasket)}><Plus /></button>
                                 </div>
                                 <span className="basket__price">
                                     {el.discount > 0

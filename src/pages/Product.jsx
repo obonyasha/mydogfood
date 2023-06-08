@@ -3,26 +3,45 @@ import { useState, useEffect, useContext } from "react";
 import { ChevronLeft, Plus, Dash, HeartFill, Heart, Truck, Check2Circle } from "react-bootstrap-icons";
 import Ctx from "../context";
 import updLike from "../utils/updLike";
+import addToBasket from "../utils/addToBasket";
 
 import Loader from "../components/Loader";
+import dec from "../utils/dec";
+import inc from "../utils/inc";
 
 const Product = () => {
+    const { userId, setServerGoods, api, basket, setBasket } = useContext(Ctx);
     const [product, setProduct] = useState({});
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const [text, setText] = useState("");
     const [isLike, setIsLike] = useState(false);
     const [modalRevActive, setModalRevActive] = useState(false);
+    const [inBasket, setInBasket] = useState(false);
     const { id } = useParams();
-    const { userId, setServerGoods, api } = useContext(Ctx);
     const navigate = useNavigate();
 
-    const clickCountUp = () => {
+    const clickCountUp = (id) => {
         setCount(count + 1);
+        setBasket(prev => prev.map(el => {
+            if (el.id === id) {
+                el.cnt++;
+            }
+            return el;
+        }))
     }
 
-    const clickCountDoWn = () => {
-        if (count > 0) {
+    const clickCountDown = (id) => {
+        if (count === 1) {
+            setBasket(prev => prev.filter(el => el.id !== id))
+            setInBasket(false)
+        } else {
             setCount(count - 1);
+            setBasket(prev => prev.map(el => {
+                if (el.id === id) {
+                    el.cnt--;
+                }
+                return el;
+            }))
         }
     }
 
@@ -43,6 +62,11 @@ const Product = () => {
                     console.log(data);
                     setProduct(data);
                     setIsLike(data.likes.includes(localStorage.getItem("rockId")));
+                    setInBasket(basket.filter(el => el.id === data._id).length > 0);
+                    setCount(basket.filter(el => el.id === data._id).length > 0 ?
+                        basket.filter(el => el.id === data._id)[0].cnt
+                        : count
+                    );
                 }
             })
     }, []);
@@ -121,15 +145,29 @@ const Product = () => {
                                 }
                             </span>
                             <div className="product__block">
-                                <div className="product__add">
-                                    <button className="product__btn" onClick={clickCountDoWn}><Dash /></button>
-                                    <span className="font__bold">{count}</span>
-                                    <button className="product__btn" onClick={clickCountUp}><Plus /></button>
-                                </div>
-                                <button className="pay__btn transition font__bold pay__btn_mobile">В корзину</button>
+                                {
+                                    inBasket && <div className="product__add">
+                                        <button className="product__btn"
+                                            onClick={() => clickCountDown(product._id)}
+                                        >
+                                            <Dash /></button>
+                                        <span className="font__bold">{count}</span>
+                                        <button className="product__btn"
+                                            onClick={() => clickCountUp(product._id)}
+                                        >
+                                            <Plus /></button>
+                                    </div>
+                                }
+
+                                <button className="pay__btn transition font__bold pay__btn_mobile"
+                                    onClick={(e) => addToBasket(e, setInBasket, setBasket, product._id, product.name, product.pictures, product.price, product.discount, product.wight, count)}
+                                    disabled={inBasket}
+                                >
+                                    {inBasket ? "В корзине" : "В корзину"}
+                                </button>
                             </div>
                             <button className="btn__gray"
-                            onClick={(e) => updLike(e, !isLike, setIsLike, setServerGoods, product._id, api)}
+                                onClick={(e) => updLike(e, !isLike, setIsLike, setServerGoods, product._id, api)}
                             >
                                 {isLike ? <HeartFill /> : <Heart />} &nbsp;В избранное
                             </button>

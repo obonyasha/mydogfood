@@ -158,6 +158,11 @@ main {
   background-color: #777;
 }
 
+.pay__btn:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
 hr {
   width: 100%;
   color: #d1d3d7;
