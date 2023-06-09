@@ -20,30 +20,8 @@ const Basket = () => {
         return acc + el.cnt
     }, 0)
 
-    // const inc = (id) => {
-    //     setBasket(prev => prev.map(el => {
-    //         if (el.id === id) {
-    //             el.cnt++;
-    //         }
-    //         return el;
-    //     }))
-    // }
-    // const dec = (id, cnt) => {
-    //     if (cnt === 1) {
-    //         setBasket(prev => prev.filter(el => el.id !== id))
-    //     } else {
-    //         setBasket(prev => prev.map(el => {
-    //             if (el.id === id) {
-    //                 el.cnt--;
-    //             }
-    //             return el;
-    //         }))
-    //     }
-    // }
-
     const delProd = (id) => {
         setBasket(prev => prev.filter(el => el.id !== id))
-        console.log(basket)
     }
 
     const clearBasket = () => {

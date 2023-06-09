@@ -25,7 +25,6 @@
 .product__block {
     display: flex;
     gap: 20px;
-    padding: 10px;
     justify-content: space-between;
 }
 

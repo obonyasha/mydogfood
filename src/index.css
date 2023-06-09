@@ -114,6 +114,7 @@ main {
 .font__gray {
   font-size: 1.5rem;
   color: darkgray;
+  padding: 10px;
 }
 
 

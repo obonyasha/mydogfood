@@ -4,49 +4,54 @@ import { ChevronLeft, Plus, Dash, HeartFill, Heart, Truck, Check2Circle } from "
 import Ctx from "../context";
 import updLike from "../utils/updLike";
 import addToBasket from "../utils/addToBasket";
-
-import Loader from "../components/Loader";
 import dec from "../utils/dec";
 import inc from "../utils/inc";
+
+import Loader from "../components/Loader";
+import ModalEditProd from "../components/ModalEditProd";
+
 
 const Product = () => {
     const { userId, setServerGoods, api, basket, setBasket } = useContext(Ctx);
     const [product, setProduct] = useState({});
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(basket.filter(el => el.id === product._id).length > 0 ?
+        basket.filter(el => el.id === product._id)[0].cnt
+        : 1);
     const [text, setText] = useState("");
     const [isLike, setIsLike] = useState(false);
     const [modalRevActive, setModalRevActive] = useState(false);
     const [inBasket, setInBasket] = useState(false);
+    const [modalEdit, setModalEdit] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
 
     const clickCountUp = (id) => {
         setCount(count + 1);
-        setBasket(prev => prev.map(el => {
-            if (el.id === id) {
-                el.cnt++;
-            }
-            return el;
-        }))
+        inc(id, setBasket);
+        setCount(basket.filter(el => el.id === product._id).length > 0 ?
+            basket.filter(el => el.id === product._id)[0].cnt
+            : count
+        );
     }
 
     const clickCountDown = (id) => {
+        setCount(count - 1)
         if (count === 1) {
-            setBasket(prev => prev.filter(el => el.id !== id))
             setInBasket(false)
-        } else {
-            setCount(count - 1);
-            setBasket(prev => prev.map(el => {
-                if (el.id === id) {
-                    el.cnt--;
-                }
-                return el;
-            }))
         }
+        dec(id, count, setBasket)
+        setCount(basket.filter(el => el.id === product._id).length > 0 ?
+            basket.filter(el => el.id === product._id)[0].cnt
+            : count
+        );
     }
 
     const clearForm = () => {
         setText("");
+    }
+
+    const editProd = () => {
+        setModalEdit(true);
     }
 
     useEffect(() => {
@@ -186,17 +191,24 @@ const Product = () => {
                                     <p>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить Ваши нужды.</p>
                                 </div>
                             </div>
-                            {userId === product.author._id &&
+                        </div>
+                    </div>
+                    <div className="product__block">
+                        <div className="product__block_left">
+                            <h3>Описание</h3>
+                            <span>{product.description}</span>
+                        </div>
+                        {userId === product.author._id &&
+                            <div className="product">
                                 <button className="product__add product__delete transition"
                                     onClick={delProduct}
-                                >Удалить товар</button>}
+                                >Удалить товар</button>
+                                <button className="product__add product__delete transition"
+                                    onClick={editProd}
+                                >Изменить товар</button>
+                            </div>
 
-                        </div>
-
-                    </div>
-                    <div className="product__block_left">
-                        <h3>Описание</h3>
-                        <p>{product.description}</p>
+                        }
                     </div>
                     <div className="product__block_left">
                         <h3>Характеристики</h3>
@@ -204,7 +216,7 @@ const Product = () => {
                             <div className="product__char_row">
                                 <span>Вес</span>
                             </div>
-                            <p>{product.wight}</p>
+                            <span>{product.wight}</span>
                         </div>
                     </div>
                     <div className="product__block product__block_team-gray product__block_flex">
@@ -268,6 +280,16 @@ const Product = () => {
                     </form>
                 </div>
             </div>
+            {modalEdit && <ModalEditProd
+            // name={product.name}
+            // price={product.price}
+            // discount={product.discount}
+            // wight = {product.wight}
+            // stock = {product.stock}
+            // tags={product.tags}
+            // pictures = {product.pictures}
+            // description = {product.description}
+            />}
         </div>
     )
 }
