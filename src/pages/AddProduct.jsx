@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Ctx from "../context";
 
 const Add = () => {
-    const { token, setServerGoods, api } = useContext(Ctx);
+    const { setServerGoods, api } = useContext(Ctx);
     const navigate = useNavigate();
     const [description, setDescription] = useState("Тут пусто");
     const [discount, setDiscount] = useState(0);
@@ -141,7 +141,7 @@ const Add = () => {
                             <Form.Control
                                 type="number"
                                 id="stock"
-                                step={10}
+                                step={1}
                                 min={10}
                                 max={1000}
                                 value={stock}

@@ -5,6 +5,7 @@ import Api from "./api";
 // компоненты
 import { Header, Footer } from "./components/General";
 import Modal from "./components/Modal";
+import ModalEditProd from "./components/ModalEditProd";
 // страницы
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
@@ -23,6 +24,7 @@ const App = () => {
     const [serverGoods, setServerGoods] = useState([]); // товары из базы данных сервера
     const [goods, setGoods] = useState(serverGoods); //товары для поиска и фильтрации
     const [api, setApi] = useState(new Api(token));
+    const [modalEdit, setModalEdit] = useState(false);
 
 
     let bStore = localStorage.getItem("rockBasket");
@@ -84,7 +86,9 @@ const App = () => {
             setGoods,
             api,
             basket,
-            setBasket
+            setBasket,
+            modalEdit,
+            setModalEdit
         }}>
             <Header
             />
@@ -103,6 +107,7 @@ const App = () => {
             {/* </main> */}
             <Footer />
             <Modal />
+            {/* <ModalEditProd /> */}
         </Ctx.Provider>
     )
 }

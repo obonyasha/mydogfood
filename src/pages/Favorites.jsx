@@ -6,6 +6,7 @@ const Favorites = () => {
     const { goods, setServerGoods, userId } = useContext(Ctx);
     return (
         <div className="container">
+            <h1 className="container__title">Избранное</h1>
             {goods.filter(el => el.likes.includes(userId)).map(g => <Card
                 {...g}
                 key={g._id}

@@ -12,7 +12,7 @@ import ModalEditProd from "../components/ModalEditProd";
 
 
 const Product = () => {
-    const { userId, setServerGoods, api, basket, setBasket } = useContext(Ctx);
+    const { userId, setServerGoods, api, basket, setBasket, modalEdit, setModalEdit } = useContext(Ctx);
     const [product, setProduct] = useState({});
     const [count, setCount] = useState(basket.filter(el => el.id === product._id).length > 0 ?
         basket.filter(el => el.id === product._id)[0].cnt
@@ -21,7 +21,7 @@ const Product = () => {
     const [isLike, setIsLike] = useState(false);
     const [modalRevActive, setModalRevActive] = useState(false);
     const [inBasket, setInBasket] = useState(false);
-    const [modalEdit, setModalEdit] = useState(false);
+    // const [modalEdit, setModalEdit] = useState(false);
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -281,14 +281,18 @@ const Product = () => {
                 </div>
             </div>
             {modalEdit && <ModalEditProd
-            // name={product.name}
-            // price={product.price}
-            // discount={product.discount}
-            // wight = {product.wight}
-            // stock = {product.stock}
-            // tags={product.tags}
-            // pictures = {product.pictures}
-            // description = {product.description}
+                show={modalEdit}
+                onHide={() => setModalEdit(false)}
+                nameProd={product.name}
+                priceProd={product.price}
+                disProd={product.discount}
+                wightProd={product.wight}
+                stockProd={product.stock}
+                tagsProd={product.tags}
+                imgProd={product.pictures}
+                desProd={product.description}
+                _id={product._id}
+                setProduct={setProduct}
             />}
         </div>
     )
