@@ -123,6 +123,9 @@ const Product = () => {
         api.delProduct(id)
             .then(data => {
                 setServerGoods(prev => prev.filter(el => el._id !== id));
+                if (basket.filter(el => el.id === id)) {
+                    setBasket(prev => prev.filter(el => el.id !== id))
+                };
                 navigate("/catalog")
             })
     }

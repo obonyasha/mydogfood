@@ -7,7 +7,7 @@ import dec from "../utils/dec";
 
 
 const Basket = () => {
-    const { basket, setBasket } = useContext(Ctx);
+    const { basket, setBasket, goods } = useContext(Ctx);
 
     const sum = basket.reduce((acc, el) => {
         return acc + el.cnt * el.price
@@ -32,7 +32,7 @@ const Basket = () => {
         if (cnt % 100 >= 5 && cnt % 100 <= 20) {
             return cnt + ' товаров';
         }
-        if (cnt % 100 == 1 || cnt % 10 == 1) {
+        if (cnt % 100 === 1 || cnt % 10 === 1) {
             return cnt + ' товар';
         } else if (cnt % 100 >= 22 && cnt % 100 <= 24 || cnt % 10 >= 2 && cnt % 10 <= 4) {
             return cnt + ' товара';
@@ -49,7 +49,11 @@ const Basket = () => {
             {basket.length > 0 ?
                 <div className="product__block">
                     <div className="basket__block_left">
-                        {basket.map(el => <div key={el.id}>
+                        {basket
+                        // .filter(el => {
+                        //     return goods.some(item => item._id === el.id)
+                        // })
+                        .map(el => <div key={el.id}>
                             <div className="basket__block">
                                 <div className="reviews__img">
                                     <img src={el.img} alt={el.name} height="100" />

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (e, setInBasket, setBasket, _id, name, img, price, discount, wight) => {
     e.preventDefault();
     e.stopPropagation();
